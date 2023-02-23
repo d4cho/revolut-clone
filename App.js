@@ -2,9 +2,11 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import * as SplashScreen from 'expo-splash-screen';
+import CountryPickView from './components/views/CountryPickView';
 
 import IntroView from './components/views/IntroView';
-import Test from './components/views/Test';
+import LoginView from './components/views/LoginView';
+import SignUpView from './components/views/SignUpView';
 
 SplashScreen.preventAutoHideAsync();
 setTimeout(SplashScreen.hideAsync, 1000);
@@ -24,10 +26,37 @@ const App = () => {
                     }}
                 />
                 <Stack.Screen
-                    name='Test'
-                    component={Test}
+                    name='Login'
+                    component={LoginView}
+                    options={{
+                        animation: 'slide_from_bottom',
+                        headerShown: true,
+                        headerTitle: '',
+                        headerBackTitleVisible: false,
+                        headerStyle: {
+                            backgroundColor: '#000',
+                        },
+                    }}
+                />
+                <Stack.Screen
+                    name='CountryPick'
+                    component={CountryPickView}
+                    options={{
+                        animation: 'slide_from_bottom',
+                        headerShown: true,
+                        headerTitle: '',
+                        headerBackTitleVisible: false,
+                        headerStyle: {
+                            backgroundColor: '#000',
+                        },
+                    }}
+                />
+                <Stack.Screen
+                    name='SignUp'
+                    component={SignUpView}
                     options={{
                         headerShown: true,
+                        animation: 'slide_from_bottom',
                     }}
                 />
             </Stack.Navigator>

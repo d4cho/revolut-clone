@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 
 import Button from '../atoms/Button';
 import ProgressBar from '../atoms/ProgressBar';
-import IntroPage from '../molecules/IntroPage';
+import IntroPage from '../molecules/IntroContent';
 
 const INTRO_PAGES = [
     {
@@ -63,8 +63,23 @@ const IntroView = ({ navigation }) => {
         }
     };
 
+    const getBgColor = () => {
+        if ([0, 2, 3, 6].includes(shownPage)) {
+            return '#0566E9'; // blue
+        } else {
+            return '#7f5cf6'; // purple
+        }
+    };
+
     return (
-        <View style={styles.container}>
+        <View
+            style={[
+                styles.container,
+                {
+                    backgroundColor: getBgColor(),
+                },
+            ]}
+        >
             <View style={styles.progressWrapper}>
                 {INTRO_PAGES.map((page, idx) => {
                     const start = idx === shownPage;
@@ -97,14 +112,14 @@ const IntroView = ({ navigation }) => {
                 <Button
                     text='Login'
                     handlePress={() => {
-                        navigation.navigate('Test');
+                        navigation.navigate('Login');
                     }}
                     theme='dark'
                 />
                 <Button
                     text='Sign up'
                     handlePress={() => {
-                        navigation.navigate('Test');
+                        navigation.navigate('SignUp');
                     }}
                 />
             </View>
@@ -119,8 +134,7 @@ export default IntroView;
 const styles = StyleSheet.create({
     container: {
         paddingTop: 58,
-        backgroundColor: '#0566ED', // blue
-        // backgroundColor: '#815CFD', // purple
+        backgroundColor: '#0566E9', // blue
         flex: 1,
     },
     progressWrapper: {
@@ -139,7 +153,6 @@ const styles = StyleSheet.create({
     },
     contentWrapper: {
         flex: 4,
-        backgroundColor: 'green',
     },
     buttonsWrapper: {
         flex: 1,

@@ -4,20 +4,22 @@ import React from 'react';
 const Button = ({ text, handlePress, theme }) => {
     if (theme === 'dark') {
         return (
-            <View style={[styles.button, styles.buttonDark]}>
-                <Pressable onPress={handlePress}>
-                    <Text style={styles.textDark}>{text}</Text>
-                </Pressable>
-            </View>
+            <Pressable
+                onPress={handlePress}
+                style={[styles.button, styles.buttonDark]}
+            >
+                <Text style={styles.textDark}>{text}</Text>
+            </Pressable>
         );
     }
 
     return (
-        <View style={[styles.button, styles.buttonLight]}>
-            <Pressable onPress={handlePress}>
-                <Text style={styles.textLight}>{text}</Text>
-            </Pressable>
-        </View>
+        <Pressable
+            onPress={handlePress}
+            style={[styles.button, styles.buttonLight]}
+        >
+            <Text style={styles.textLight}>{text}</Text>
+        </Pressable>
     );
 };
 
@@ -29,7 +31,7 @@ const styles = StyleSheet.create({
         height: 40,
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 10,
+        borderRadius: 15,
     },
     buttonDark: {
         backgroundColor: '#000',
