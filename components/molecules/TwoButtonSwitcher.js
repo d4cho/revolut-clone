@@ -1,8 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
-const TwoButtonSwitcher = () => {
-    const [selectedOption, setSelectedOption] = useState(1);
+const TwoButtonSwitcher = ({ defaultOption, refreshFunction }) => {
+    const [selectedOption, setSelectedOption] = useState(0);
+
+    useEffect(() => {
+        if (defaultOption || defaultOption === 0) {
+            setSelectedOption(defaultOption);
+        }
+    }, [defaultOption]);
+
+    const handlePress = (option) => {
+        refreshFunction(option);
+    };
 
     const renderButton = (text, option) => {
         return (
@@ -14,7 +24,7 @@ const TwoButtonSwitcher = () => {
                             selectedOption === option ? '#777777' : '#222222',
                     },
                 ]}
-                onPress={() => setSelectedOption(option)}
+                onPress={() => handlePress(option)}
             >
                 <Text
                     style={[
@@ -33,8 +43,8 @@ const TwoButtonSwitcher = () => {
 
     return (
         <View style={styles.container}>
-            {renderButton('Phone number', 1)}
-            {renderButton('Email', 2)}
+            {renderButton('Phone number', 0)}
+            {renderButton('Email', 1)}
         </View>
     );
 };

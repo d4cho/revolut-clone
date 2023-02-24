@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import {
     KeyboardAvoidingView,
     Pressable,
@@ -6,13 +6,40 @@ import {
     Text,
     View,
     TextInput,
+    Dimensions,
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import TwoButtonSwitcher from '../molecules/TwoButtonSwitcher';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import Carousel from 'react-native-reanimated-carousel';
+
+const LOGIN_DATA = [
+    {
+        type: 'phone',
+        placeholderText: 'Enter your phone',
+        lostText: 'Lost access to my phone number',
+    },
+    {
+        type: 'email',
+        placeholderText: 'Enter your email',
+        lostText: 'Lost access to my email',
+    },
+];
 
 const LoginView = ({ navigation }) => {
-    const [isValidPhoneNum, setIsValidPhoneNum] = useState(false);
+    const carouselRef = useRef(null);
+    const width = Dimensions.get('window').width;
+
+    const [selectedOption, setSelectedOption] = useState(0);
     const [phoneNum, setPhoneNum] = useState('');
+    const [isValidPhoneNum, setIsValidPhoneNum] = useState(false);
+    const [email, setEmail] = useState('');
+    const [isValidEmail, setIsValidEmail] = useState(false);
+
+    const refreshFunction = (option) => {
+        setSelectedOption(option);
+        carouselRef.current?.scrollTo({ index: option, animated: true });
+    };
 
     const handlePhoneNumChange = (text) => {
         setPhoneNum(text);
@@ -23,69 +50,162 @@ const LoginView = ({ navigation }) => {
         }
     };
 
-    return (
-        <KeyboardAvoidingView style={styles.container}>
-            <View>
-                <Text style={styles.header}>Log in to Revolut</Text>
-                <View style={styles.switcherWrapper}>
-                    <TwoButtonSwitcher />
-                </View>
+    const handleEmailChange = (text) => {
+        setEmail(text);
+        if (text) {
+            setIsValidEmail(true);
+        } else {
+            setIsValidEmail(false);
+        }
+    };
 
-                <View style={styles.inputWrapper}>
-                    <Pressable
-                        style={styles.country}
-                        onPress={() => {
-                            navigation.navigate('CountryPick');
+    const renderItem = (info) => {
+        const { item } = info;
+
+        if (item.type === 'phone') {
+            return (
+                <View
+                    style={{
+                        flex: 1,
+                    }}
+                >
+                    <View style={styles.inputWrapper}>
+                        <Pressable
+                            style={styles.country}
+                            onPress={() => {
+                                navigation.navigate('CountryPick');
+                            }}
+                        >
+                            <Text style={styles.countryText}>+1</Text>
+                        </Pressable>
+                        <TextInput
+                            style={styles.input}
+                            onChangeText={handlePhoneNumChange}
+                            value={phoneNum}
+                            placeholder={item.placeholderText}
+                            placeholderTextColor='#fff'
+                            keyboardType='numeric'
+                            textContentType='telephoneNumber'
+                        />
+                    </View>
+                    <Text style={styles.lostAccess}>{item.lostText}</Text>
+                </View>
+            );
+        } else {
+            return (
+                <View
+                    style={{
+                        flex: 1,
+                    }}
+                >
+                    <View style={styles.inputWrapper}>
+                        <TextInput
+                            style={styles.input}
+                            onChangeText={handleEmailChange}
+                            value={email}
+                            placeholder={item.placeholderText}
+                            placeholderTextColor='#fff'
+                            keyboardType='email-address'
+                            textContentType='emailAddress'
+                        />
+                    </View>
+                    <Text style={styles.lostAccess}>{item.lostText}</Text>
+                </View>
+            );
+        }
+    };
+
+    return (
+        <GestureHandlerRootView style={styles.container}>
+            <KeyboardAvoidingView style={styles.flexContainer}>
+                <View style={{ flex: 1 }}>
+                    <Text style={styles.header}>Log in to Revolut</Text>
+                    <View style={styles.switcherWrapper}>
+                        <TwoButtonSwitcher
+                            defaultOption={selectedOption}
+                            refreshFunction={refreshFunction}
+                        />
+                    </View>
+
+                    <Carousel
+                        ref={carouselRef}
+                        loop={false}
+                        width={width - 20}
+                        data={LOGIN_DATA}
+                        scrollAnimationDuration={200}
+                        onSnapToItem={(index) => {
+                            setSelectedOption(index);
                         }}
-                    >
-                        <Text style={styles.countryText}>+1</Text>
-                    </Pressable>
-                    <TextInput
-                        style={styles.phoneNumInput}
-                        onChangeText={handlePhoneNumChange}
-                        value={phoneNum}
-                        placeholder='Enter your phone'
-                        placeholderTextColor='#fff'
-                        keyboardType='numeric'
-                        textContentType='telephoneNumber'
+                        renderItem={(info) => renderItem(info)}
                     />
                 </View>
-                <Text style={styles.lostAccess}>
-                    Lost access to my phone number
-                </Text>
-            </View>
 
-            <View
-                style={[
-                    styles.continueBtn,
-                    {
-                        backgroundColor: isValidPhoneNum
-                            ? '#0566E9'
-                            : '#010048',
-                    },
-                ]}
-            >
-                <Pressable
-                    onPress={() => {
-                        alert('go to passcode view');
-                    }}
-                    disabled={!isValidPhoneNum}
-                >
-                    <Text
-                        style={[
-                            styles.continueBtnText,
-                            {
-                                color: isValidPhoneNum ? '#fff' : '#777777',
-                            },
-                        ]}
-                    >
-                        Continue
-                    </Text>
-                </Pressable>
-            </View>
+                {/* Continue Button */}
+                {selectedOption === 0 ? (
+                    <View>
+                        <Pressable
+                            style={[
+                                styles.continueBtn,
+                                {
+                                    backgroundColor: isValidPhoneNum
+                                        ? '#0566E9'
+                                        : '#010048',
+                                },
+                            ]}
+                            onPress={() => {
+                                alert('go to passcode view');
+                            }}
+                            disabled={!isValidPhoneNum}
+                        >
+                            <Text
+                                style={[
+                                    styles.continueBtnText,
+                                    {
+                                        color: isValidPhoneNum
+                                            ? '#fff'
+                                            : '#777777',
+                                    },
+                                ]}
+                            >
+                                Continue
+                            </Text>
+                        </Pressable>
+                    </View>
+                ) : (
+                    <View>
+                        <Pressable
+                            style={[
+                                styles.continueBtn,
+                                {
+                                    backgroundColor: isValidEmail
+                                        ? '#0566E9'
+                                        : '#010048',
+                                },
+                            ]}
+                            onPress={() => {
+                                alert('go to passcode view');
+                            }}
+                            disabled={!isValidEmail}
+                        >
+                            <Text
+                                style={[
+                                    styles.continueBtnText,
+                                    {
+                                        color: isValidEmail
+                                            ? '#fff'
+                                            : '#777777',
+                                    },
+                                ]}
+                            >
+                                Continue
+                            </Text>
+                        </Pressable>
+                    </View>
+                )}
 
-            <StatusBar style='light' />
-        </KeyboardAvoidingView>
+                <StatusBar style='light' />
+            </KeyboardAvoidingView>
+        </GestureHandlerRootView>
     );
 };
 
@@ -97,7 +217,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#000',
         padding: 10,
         paddingBottom: 50,
-        justifyContent: 'space-between',
+    },
+    flexContainer: {
+        flex: 1,
     },
     header: {
         color: '#fff',
@@ -123,7 +245,7 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontSize: 16,
     },
-    phoneNumInput: {
+    input: {
         flex: 1,
         backgroundColor: '#777777',
         color: '#fff',
