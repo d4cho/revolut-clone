@@ -12,6 +12,7 @@ import { StatusBar } from 'expo-status-bar';
 import TwoButtonSwitcher from '../molecules/TwoButtonSwitcher';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import Carousel from 'react-native-reanimated-carousel';
+import CountryPicker, { DARK_THEME } from 'react-native-country-picker-modal';
 
 const LOGIN_DATA = [
     {
@@ -31,10 +32,19 @@ const LoginView = ({ navigation }) => {
     const width = Dimensions.get('window').width;
 
     const [selectedOption, setSelectedOption] = useState(0);
+
     const [phoneNum, setPhoneNum] = useState('');
     const [isValidPhoneNum, setIsValidPhoneNum] = useState(false);
     const [email, setEmail] = useState('');
     const [isValidEmail, setIsValidEmail] = useState(false);
+
+    const [countryCode, setCountryCode] = useState('CA');
+    const [country, setCountry] = useState(null);
+
+    const onSelectPhoneCountry = (country) => {
+        setCountryCode(country.cca2);
+        setCountry(country);
+    };
 
     const refreshFunction = (option) => {
         setSelectedOption(option);
@@ -70,13 +80,18 @@ const LoginView = ({ navigation }) => {
                     }}
                 >
                     <View style={styles.inputWrapper}>
-                        <Pressable
-                            style={styles.country}
-                            onPress={() => {
-                                navigation.navigate('CountryPick');
-                            }}
-                        >
-                            <Text style={styles.countryText}>+1</Text>
+                        <Pressable style={styles.country}>
+                            <CountryPicker
+                                theme={DARK_THEME}
+                                countryCode={countryCode}
+                                withFlag={true}
+                                withEmoji={true}
+                                withFilter={true}
+                                withCallingCode={true}
+                                onSelect={onSelectPhoneCountry}
+                                withCallingCodeButton={true}
+                                visible={false}
+                            />
                         </Pressable>
                         <TextInput
                             style={styles.input}
@@ -86,6 +101,7 @@ const LoginView = ({ navigation }) => {
                             placeholderTextColor='#fff'
                             keyboardType='numeric'
                             textContentType='telephoneNumber'
+                            clearButtonMode='while-editing'
                         />
                     </View>
                     <Text style={styles.lostAccess}>{item.lostText}</Text>
@@ -107,6 +123,7 @@ const LoginView = ({ navigation }) => {
                             placeholderTextColor='#fff'
                             keyboardType='email-address'
                             textContentType='emailAddress'
+                            clearButtonMode='while-editing'
                         />
                     </View>
                     <Text style={styles.lostAccess}>{item.lostText}</Text>
@@ -153,7 +170,7 @@ const LoginView = ({ navigation }) => {
                                 },
                             ]}
                             onPress={() => {
-                                alert('go to passcode view');
+                                navigation.navigate('EnterPasscode');
                             }}
                             disabled={!isValidPhoneNum}
                         >
@@ -183,7 +200,7 @@ const LoginView = ({ navigation }) => {
                                 },
                             ]}
                             onPress={() => {
-                                alert('go to passcode view');
+                                navigation.navigate('EnterPasscode');
                             }}
                             disabled={!isValidEmail}
                         >
@@ -234,7 +251,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     country: {
-        width: 80,
+        width: 100,
         marginRight: 10,
         backgroundColor: '#222222',
         borderRadius: 8,
