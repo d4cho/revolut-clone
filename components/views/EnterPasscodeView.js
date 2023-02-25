@@ -1,13 +1,46 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
+import Numpad from '../molecules/Numpad';
 
 const EnterPasscodeView = () => {
     const [passcode, setPasscode] = useState(['', '', '', '']);
+
+    const handleNumPress = (num) => {
+        let newPasscode = [...passcode];
+
+        if (num === 'delete') {
+            for (let i = newPasscode.length - 1; i >= 0; i--) {
+                if (newPasscode[i]) {
+                    newPasscode[i] = '';
+                    break;
+                }
+            }
+        } else {
+            for (let i = 0; i < newPasscode.length; i++) {
+                if (!newPasscode[i]) {
+                    newPasscode[i] = num;
+                    break;
+                }
+            }
+        }
+
+        setPasscode(newPasscode);
+    };
 
     return (
         <View style={styles.container}>
             <View style={styles.topWrapper}>
                 <Text style={styles.header}>Enter passcode</Text>
+
+                <View style={{ flexDirection: 'row' }}>
+                    {passcode.map((item, idx) => {
+                        return (
+                            <Text key={idx} style={styles.header}>
+                                {item}
+                            </Text>
+                        );
+                    })}
+                </View>
 
                 <View style={styles.dotsWrapper}>
                     {passcode.map((code, idx) => {
@@ -29,7 +62,12 @@ const EnterPasscodeView = () => {
             </View>
 
             <View style={styles.bottomWrapper}>
-                <Text style={{ color: '#fff' }}>Keypad</Text>
+                <View style={styles.numpadWrapper}>
+                    <Numpad
+                        handleNumPress={handleNumPress}
+                        showDelete={passcode.join('')}
+                    />
+                </View>
 
                 <Text style={styles.forgot}>Forgot passcode?</Text>
             </View>
@@ -58,7 +96,6 @@ const styles = StyleSheet.create({
         flex: 3,
         justifyContent: 'flex-end',
         alignItems: 'center',
-        backgroundColor: 'blue',
     },
     header: {
         color: '#fff',
@@ -79,5 +116,11 @@ const styles = StyleSheet.create({
         color: '#0566E9',
         fontSize: 16,
         fontWeight: 'bold',
+    },
+    numpadWrapper: {
+        backgroundColor: '#000',
+        width: '100%',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 });
