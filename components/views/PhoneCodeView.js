@@ -9,27 +9,34 @@ import {
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import CountryPicker, { DARK_THEME } from 'react-native-country-picker-modal';
+import PhoneCodeInput from '../atoms/PhoneCodeInput';
 
-const SignUpView = ({ navigation }) => {
-    const [phoneNum, setPhoneNum] = useState('');
-    const [isValidPhoneNum, setIsValidPhoneNum] = useState(false);
+const PhoneCodeView = ({ route, navigation }) => {
+    const { callingCode, phoneNum } = route.params;
 
-    const [countryCode, setCountryCode] = useState('CA');
-    const [country, setCountry] = useState(null);
-
-    const onSelectPhoneCountry = (country) => {
-        console.log(country);
-        setCountryCode(country.cca2);
-        setCountry(country);
+    const formatPhoneNum = (num) => {
+        const formattedPhoneNum = num.split('');
+        formattedPhoneNum.splice(3, 0, '-');
+        formattedPhoneNum.splice(7, 0, '-');
+        return formattedPhoneNum.join('');
     };
 
+    const [code, setCode] = useState({
+        0: '0',
+        1: '1',
+        2: '2',
+        3: '',
+        4: '4',
+        5: '5',
+        6: '6',
+    });
+    const [isValidCode, setIsValidCode] = useState(false);
+
     const handlePhoneNumChange = (text) => {
-        setPhoneNum(text);
         if (text.length === 10) {
-            setIsValidPhoneNum(true);
+            setIsValidCode(true);
         } else {
-            setIsValidPhoneNum(false);
+            setIsValidCode(false);
         }
     };
 
@@ -37,10 +44,11 @@ const SignUpView = ({ navigation }) => {
         <GestureHandlerRootView style={styles.container}>
             <KeyboardAvoidingView style={styles.flexContainer}>
                 <View style={{ flex: 1 }}>
-                    <Text style={styles.header}>Let's get started!</Text>
+                    <Text style={styles.header}>6-digit code</Text>
                     <Text style={styles.subHeader}>
-                        Enter your phone number. We will send you a confirmation
-                        code there
+                        {`Code sent to +${callingCode} ${formatPhoneNum(
+                            phoneNum
+                        )} unless you already have an account`}
                     </Text>
 
                     <View
@@ -49,30 +57,11 @@ const SignUpView = ({ navigation }) => {
                         }}
                     >
                         <View style={styles.inputWrapper}>
-                            <Pressable style={styles.country}>
-                                <CountryPicker
-                                    theme={DARK_THEME}
-                                    countryCode={countryCode}
-                                    withFlag={true}
-                                    withEmoji={true}
-                                    withFilter={true}
-                                    withCallingCode={true}
-                                    onSelect={onSelectPhoneCountry}
-                                    withCallingCodeButton={true}
-                                    visible={false}
-                                />
-                            </Pressable>
-                            <TextInput
-                                style={styles.input}
-                                onChangeText={handlePhoneNumChange}
-                                value={phoneNum}
-                                placeholder='Mobile number'
-                                placeholderTextColor='#fff'
-                                keyboardType='numeric'
-                                textContentType='telephoneNumber'
-                                clearButtonMode='while-editing'
-                            />
+                            <PhoneCodeInput code={code} />
                         </View>
+
+                        <Text style={styles.resend}>Resend code in 0:15</Text>
+
                         <Pressable
                             onPress={() => {
                                 navigation.navigate('Login', {
@@ -93,24 +82,21 @@ const SignUpView = ({ navigation }) => {
                         style={[
                             styles.continueBtn,
                             {
-                                backgroundColor: isValidPhoneNum
+                                backgroundColor: isValidCode
                                     ? '#0566E9'
                                     : '#010048',
                             },
                         ]}
                         onPress={() => {
-                            navigation.navigate('PhoneCodeView', {
-                                callingCode: country?.callingCode[0] || '1',
-                                phoneNum,
-                            });
+                            navigation.navigate('PhoneCode');
                         }}
-                        disabled={!isValidPhoneNum}
+                        disabled={!isValidCode}
                     >
                         <Text
                             style={[
                                 styles.continueBtnText,
                                 {
-                                    color: isValidPhoneNum ? '#fff' : '#777777',
+                                    color: isValidCode ? '#fff' : '#777777',
                                 },
                             ]}
                         >
@@ -125,7 +111,7 @@ const SignUpView = ({ navigation }) => {
     );
 };
 
-export default SignUpView;
+export default PhoneCodeView;
 
 const styles = StyleSheet.create({
     container: {
@@ -164,14 +150,9 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontSize: 16,
     },
-    input: {
-        flex: 1,
-        backgroundColor: '#777777',
+    resend: {
+        marginTop: 20,
         color: '#fff',
-        fontSize: 16,
-        height: 50,
-        padding: 10,
-        borderRadius: 8,
     },
     loginLink: {
         marginTop: 20,
