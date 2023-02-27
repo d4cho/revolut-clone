@@ -4,9 +4,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as SplashScreen from 'expo-splash-screen';
 
 import IntroView from './components/views/IntroView';
-import LoginView from './components/views/LoginView';
-import SignUpView from './components/views/SignUpView';
-import EnterPasscodeView from './components/views/EnterPasscodeView';
+import LoginNav from './components/views/LoginNav';
+import SignUpNav from './components/views/SignUpNav';
 
 SplashScreen.preventAutoHideAsync();
 setTimeout(SplashScreen.hideAsync, 1000);
@@ -27,41 +26,18 @@ const App = () => {
                 />
                 <Stack.Screen
                     name='Login'
-                    component={LoginView}
+                    component={LoginNav}
                     options={{
                         animation: 'slide_from_bottom',
-                        headerShown: true,
-                        headerTitle: '',
-                        headerBackTitleVisible: false,
-                        headerStyle: {
-                            backgroundColor: '#000',
-                        },
+                        headerShown: false,
                     }}
                 />
                 <Stack.Screen
                     name='SignUp'
-                    component={SignUpView}
+                    component={SignUpNav}
                     options={{
                         animation: 'slide_from_bottom',
-                        headerShown: true,
-                        headerTitle: '',
-                        headerBackTitleVisible: false,
-                        headerStyle: {
-                            backgroundColor: '#000',
-                        },
-                    }}
-                />
-                <Stack.Screen
-                    name='EnterPasscode'
-                    component={EnterPasscodeView}
-                    options={{
-                        animation: 'fade',
-                        headerShown: true,
-                        headerTitle: '',
-                        headerBackTitleVisible: false,
-                        headerStyle: {
-                            backgroundColor: '#000',
-                        },
+                        headerShown: false,
                     }}
                 />
             </Stack.Navigator>
