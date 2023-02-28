@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     KeyboardAvoidingView,
     Pressable,
     StyleSheet,
     Text,
     View,
-    TextInput,
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
@@ -22,22 +21,26 @@ const PhoneCodeView = ({ route, navigation }) => {
     };
 
     const [code, setCode] = useState({
-        0: '0',
-        1: '1',
-        2: '2',
+        0: '',
+        1: '',
+        2: '',
         3: '',
-        4: '4',
-        5: '5',
-        6: '6',
+        4: '',
+        5: '',
     });
     const [isValidCode, setIsValidCode] = useState(false);
 
-    const handlePhoneNumChange = (text) => {
-        if (text.length === 10) {
+    useEffect(() => {
+        if (code[0] && code[1] && code[2] && code[3] && code[4] && code[5]) {
             setIsValidCode(true);
         } else {
             setIsValidCode(false);
         }
+    }, [code]);
+
+    const handleChangeCode = (text, idx) => {
+        let newCode = { ...code, [idx]: text };
+        setCode(newCode);
     };
 
     return (
@@ -57,10 +60,13 @@ const PhoneCodeView = ({ route, navigation }) => {
                         }}
                     >
                         <View style={styles.inputWrapper}>
-                            <PhoneCodeInput code={code} />
+                            <PhoneCodeInput
+                                code={code}
+                                handleChangeCode={handleChangeCode}
+                            />
                         </View>
 
-                        <Text style={styles.resend}>Resend code in 0:15</Text>
+                        <Text style={styles.resend}>Resend code</Text>
 
                         <Pressable
                             onPress={() => {
@@ -100,7 +106,7 @@ const PhoneCodeView = ({ route, navigation }) => {
                                 },
                             ]}
                         >
-                            Sign up
+                            Continue
                         </Text>
                     </Pressable>
                 </View>
@@ -152,7 +158,8 @@ const styles = StyleSheet.create({
     },
     resend: {
         marginTop: 20,
-        color: '#fff',
+        color: '#0566E9',
+        fontSize: 14,
     },
     loginLink: {
         marginTop: 20,

@@ -1,19 +1,61 @@
-import { StyleSheet, Text, TextInput, View } from 'react-native';
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { StyleSheet, TextInput, View } from 'react-native';
 
-const PhoneCodeInput = ({ code }) => {
+const PhoneCodeInput = ({ code, handleChangeCode }) => {
+    const [focusedIndex, setFocusedIndex] = useState(0);
+
+    const refs = {
+        0: useRef(null),
+        1: useRef(null),
+        2: useRef(null),
+        3: useRef(null),
+        4: useRef(null),
+        5: useRef(null),
+    };
+
+    useEffect(() => {
+        refs[0]?.current.focus();
+        setFocusedIndex(0);
+    }, []);
+
+    const handleChangeText = (text, idx) => {
+        if (text.length > 1) {
+            refs[idx + 1]?.current.focus();
+            setFocusedIndex(idx + 1);
+            handleChangeCode(text[1], idx);
+            return;
+        }
+
+        if (!text) {
+            refs[idx - 1]?.current.focus();
+            setFocusedIndex(idx - 1);
+        } else {
+            refs[idx + 1]?.current.focus();
+            setFocusedIndex(idx + 1);
+        }
+
+        handleChangeCode(text, idx);
+    };
+
     return (
         <View style={styles.container}>
             {Object.keys(code).map((key, idx) => {
-                if (idx === 3) {
-                    return <View style={styles.dash}></View>;
-                }
+                const isFocused = idx == focusedIndex;
 
                 return (
                     <View style={styles.inputWrapper}>
                         <TextInput
-                            style={styles.input}
-                            onChangeText={() => {}}
+                            ref={refs[idx]}
+                            key={idx}
+                            style={[
+                                styles.input,
+                                {
+                                    backgroundColor: isFocused
+                                        ? '#777777'
+                                        : '#555555',
+                                },
+                            ]}
+                            onChangeText={(text) => handleChangeText(text, idx)}
                             value={code[key]}
                             placeholderTextColor='#fff'
                             keyboardType='numeric'
@@ -30,7 +72,6 @@ export default PhoneCodeInput;
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'blue',
         flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
@@ -43,7 +84,7 @@ const styles = StyleSheet.create({
         marginRight: 10,
     },
     input: {
-        backgroundColor: '#777777',
+        backgroundColor: '#555555',
         color: '#fff',
         width: '100%',
         height: '100%',
