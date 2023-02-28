@@ -11,7 +11,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import PhoneCodeInput from '../atoms/PhoneCodeInput';
 
 const PhoneCodeView = ({ route, navigation }) => {
-    const { callingCode, phoneNum } = route.params;
+    const { callingCode, phoneNum } = route?.params;
 
     const formatPhoneNum = (num) => {
         const formattedPhoneNum = num.split('');
@@ -94,7 +94,7 @@ const PhoneCodeView = ({ route, navigation }) => {
                             },
                         ]}
                         onPress={() => {
-                            navigation.navigate('PhoneCode');
+                            navigation.navigate('CountryPickView');
                         }}
                         disabled={!isValidCode}
                     >

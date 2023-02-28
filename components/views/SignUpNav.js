@@ -6,6 +6,7 @@ import HeaderBackButton from '../atoms/HeaderBackButton';
 import EnterPasscodeView from './EnterPasscodeView';
 import SignUpView from './SignUpView';
 import PhoneCodeView from './PhoneCodeView';
+import CountryPickView from './CountryPickView';
 
 const SignUpStack = createNativeStackNavigator();
 
@@ -50,6 +51,28 @@ const LoginNav = ({ navigation }) => {
                     ),
                 }}
             />
+            <SignUpStack.Screen
+                name='CountryPickView'
+                component={CountryPickView}
+                options={{
+                    animation: 'slide_from_right',
+                    headerShown: true,
+                    headerTitle: '',
+                    headerStyle: {
+                        backgroundColor: '#000',
+                    },
+                    headerLeft: () => (
+                        <HeaderBackButton
+                            onPress={() =>
+                                navigation.navigate('SignUp', {
+                                    screen: 'SignUpView',
+                                })
+                            }
+                        />
+                    ),
+                }}
+            />
+
             <SignUpStack.Screen
                 name='EnterPasscode'
                 component={EnterPasscodeView}
