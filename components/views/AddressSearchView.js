@@ -1,13 +1,10 @@
-import React, { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import React from 'react';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 
 const AddressSearchView = ({ navigation }) => {
-    // const [addressInfo, setAddressInfo] = useState(null);
-
     const handleAddressPress = (data) => {
-        // setAddressInfo(data);
         navigation.navigate('HomeAddressView', {
             addressInfo: data,
         });
@@ -28,6 +25,25 @@ const AddressSearchView = ({ navigation }) => {
                         }}
                     />
                 </View>
+
+                <Pressable
+                    style={{
+                        width: '100%',
+                        height: 40,
+                        marginTop: 20,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        borderRadius: 15,
+                        backgroundColor: 'blue',
+                    }}
+                    onPress={() =>
+                        navigation.navigate('HomeAddressView', {
+                            addressInfo: null,
+                        })
+                    }
+                >
+                    <Text style={{ color: '#fff' }}>only for dev</Text>
+                </Pressable>
 
                 <StatusBar style='light' />
             </View>

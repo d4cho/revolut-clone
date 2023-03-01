@@ -8,77 +8,44 @@ import {
     View,
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { MaskedTextInput } from 'react-native-mask-text';
 
 const EnterNameView = ({ navigation }) => {
-    const [dob, setDob] = useState('');
+    const [email, setEmail] = useState('');
 
     const [isContinue, setIsContinue] = useState(false);
 
     useEffect(() => {
-        if (dob.length === 10) {
+        if (email) {
             setIsContinue(true);
         } else {
             setIsContinue(false);
         }
-    }, [dob]);
+    }, [email]);
 
-    const handleDobChange = (text, rawText) => {
-        setDob(text);
+    const handleEmailChange = (text) => {
+        setEmail(text);
     };
 
     return (
         <KeyboardAvoidingView style={styles.container}>
             <View style={styles.flexContainer}>
                 <View style={{ flex: 1 }}>
-                    <Text style={styles.header}>Date of Birth</Text>
+                    <Text style={styles.header}>Email</Text>
                     <Text style={styles.subHeader}>
-                        As stated on your official ID. You must be 18 or older
-                        to open a Revolut account.
+                        We'll notify you of important changes, new features and
+                        benefits
                     </Text>
 
-                    <View>
-                        <MaskedTextInput
-                            type='date'
-                            options={{
-                                dateFormat: 'MM/DD/YYYY',
-                            }}
-                            onChangeText={(text, rawText) => {
-                                handleDobChange(text, rawText);
-                            }}
-                            style={styles.input}
-                            placeholder='MM/DD/YYYY'
-                            placeholderTextColor='#777777'
-                            keyboardType='numeric'
-                            clearButtonMode='while-editing'
-                            autoFocus
-                            maxLength={8}
-                        />
-
-                        <Text
-                            style={{
-                                color: '#fff',
-                                fontSize: 16,
-                                position: 'absolute',
-                                top: 35,
-                                left: 10,
-                            }}
-                        >
-                            {dob}
-                        </Text>
-                    </View>
-
-                    {/* <TextInput
+                    <TextInput
                         style={styles.input}
-                        onChangeText={handleDobChange}
-                        value={dob}
-                        placeholder='MM/DD/YYYY'
-                        keyboardType='numeric'
+                        onChangeText={handleEmailChange}
+                        value={email}
+                        placeholder='Email'
+                        keyboardType='email-address'
                         placeholderTextColor='#777777'
                         clearButtonMode='while-editing'
                         autoFocus
-                        maxLength={10}
-                    /> */}
+                    />
                 </View>
 
                 {/* Continue Button */}
@@ -93,7 +60,7 @@ const EnterNameView = ({ navigation }) => {
                             },
                         ]}
                         onPress={() => {
-                            navigation.navigate('EnterEmailView');
+                            navigation.navigate('EnterDobView');
                         }}
                         disabled={!isContinue}
                     >
@@ -143,12 +110,12 @@ const styles = StyleSheet.create({
     input: {
         marginTop: 20,
         backgroundColor: '#333333',
-        color: '#333333',
+        color: '#fff',
         fontSize: 16,
         height: 50,
         paddingTop: 10,
         paddingBottom: 10,
-        paddingLeft: 20,
+        paddingLeft: 10,
         borderRadius: 8,
     },
     continueBtn: {
