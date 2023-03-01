@@ -9,7 +9,6 @@ const CountryPickView = ({ navigation }) => {
     const [country, setCountry] = useState(null);
 
     const onSelectCountry = (country) => {
-        console.log(country);
         setCountryCode(country.cca2);
         setCountry(country);
     };
@@ -51,7 +50,7 @@ const CountryPickView = ({ navigation }) => {
                             },
                         ]}
                         onPress={() => {
-                            navigation.navigate('PhoneCodeView');
+                            navigation.navigate('AddressSearchView');
                         }}
                         disabled={!country}
                     >

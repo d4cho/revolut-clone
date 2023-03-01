@@ -19,7 +19,6 @@ const SignUpView = ({ navigation }) => {
     const [country, setCountry] = useState(null);
 
     const onSelectPhoneCountry = (country) => {
-        console.log(country);
         setCountryCode(country.cca2);
         setCountry(country);
     };
@@ -71,6 +70,7 @@ const SignUpView = ({ navigation }) => {
                                 keyboardType='numeric'
                                 textContentType='telephoneNumber'
                                 clearButtonMode='while-editing'
+                                autoFocus
                             />
                         </View>
                         <Pressable

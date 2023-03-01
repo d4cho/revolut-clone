@@ -43,10 +43,9 @@ const PhoneCodeInput = ({ code, handleChangeCode }) => {
                 const isFocused = idx == focusedIndex;
 
                 return (
-                    <View style={styles.inputWrapper}>
+                    <View key={idx} style={styles.inputWrapper}>
                         <TextInput
                             ref={refs[idx]}
-                            key={idx}
                             style={[
                                 styles.input,
                                 {

@@ -7,6 +7,10 @@ import EnterPasscodeView from './EnterPasscodeView';
 import SignUpView from './SignUpView';
 import PhoneCodeView from './PhoneCodeView';
 import CountryPickView from './CountryPickView';
+import AddressSearchView from './AddressSearchView';
+import HomeAddressView from './HomeAddressView';
+import EnterNameView from './EnterNameView';
+import EnterDobView from './EnterDobView';
 
 const SignUpStack = createNativeStackNavigator();
 
@@ -54,6 +58,90 @@ const LoginNav = ({ navigation }) => {
             <SignUpStack.Screen
                 name='CountryPickView'
                 component={CountryPickView}
+                options={{
+                    animation: 'slide_from_right',
+                    headerShown: true,
+                    headerTitle: '',
+                    headerStyle: {
+                        backgroundColor: '#000',
+                    },
+                    headerLeft: () => (
+                        <HeaderBackButton
+                            onPress={() =>
+                                navigation.navigate('SignUp', {
+                                    screen: 'SignUpView',
+                                })
+                            }
+                        />
+                    ),
+                }}
+            />
+            <SignUpStack.Screen
+                name='AddressSearchView'
+                component={AddressSearchView}
+                options={{
+                    animation: 'slide_from_right',
+                    headerShown: true,
+                    headerTitle: '',
+                    headerStyle: {
+                        backgroundColor: '#000',
+                    },
+                    headerLeft: () => (
+                        <HeaderBackButton
+                            onPress={() =>
+                                navigation.navigate('SignUp', {
+                                    screen: 'SignUpView',
+                                })
+                            }
+                        />
+                    ),
+                }}
+            />
+            <SignUpStack.Screen
+                name='HomeAddressView'
+                component={HomeAddressView}
+                options={{
+                    animation: 'slide_from_right',
+                    headerShown: true,
+                    headerTitle: '',
+                    headerStyle: {
+                        backgroundColor: '#000',
+                    },
+                    headerLeft: () => (
+                        <HeaderBackButton
+                            onPress={() =>
+                                navigation.navigate('SignUp', {
+                                    screen: 'SignUpView',
+                                })
+                            }
+                        />
+                    ),
+                }}
+            />
+            <SignUpStack.Screen
+                name='EnterNameView'
+                component={EnterNameView}
+                options={{
+                    animation: 'slide_from_right',
+                    headerShown: true,
+                    headerTitle: '',
+                    headerStyle: {
+                        backgroundColor: '#000',
+                    },
+                    headerLeft: () => (
+                        <HeaderBackButton
+                            onPress={() =>
+                                navigation.navigate('SignUp', {
+                                    screen: 'SignUpView',
+                                })
+                            }
+                        />
+                    ),
+                }}
+            />
+            <SignUpStack.Screen
+                name='EnterDobView'
+                component={EnterDobView}
                 options={{
                     animation: 'slide_from_right',
                     headerShown: true,
