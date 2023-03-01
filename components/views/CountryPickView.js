@@ -1,13 +1,6 @@
 import React, { useState } from 'react';
-import {
-    KeyboardAvoidingView,
-    Pressable,
-    StyleSheet,
-    Text,
-    View,
-} from 'react-native';
+import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import CountryPicker, { DARK_THEME } from 'react-native-country-picker-modal';
 import TermsAndServices from '../atoms/TermsAndServices';
 
@@ -22,8 +15,8 @@ const CountryPickView = ({ navigation }) => {
     };
 
     return (
-        <GestureHandlerRootView style={styles.container}>
-            <KeyboardAvoidingView style={styles.flexContainer}>
+        <View style={styles.container}>
+            <ScrollView style={styles.flexContainer}>
                 <View>
                     <Text style={styles.header}>Country of residence</Text>
                     <Text style={styles.subHeader}>
@@ -76,8 +69,8 @@ const CountryPickView = ({ navigation }) => {
                 </View>
 
                 <StatusBar style='light' />
-            </KeyboardAvoidingView>
-        </GestureHandlerRootView>
+            </ScrollView>
+        </View>
     );
 };
 
@@ -92,7 +85,7 @@ const styles = StyleSheet.create({
     },
     flexContainer: {
         flex: 1,
-        justifyContent: 'space-between',
+        // justifyContent: 'space-between',
     },
     header: {
         color: '#fff',
@@ -118,6 +111,7 @@ const styles = StyleSheet.create({
     continueBtn: {
         width: '100%',
         height: 40,
+        marginTop: 20,
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 15,
