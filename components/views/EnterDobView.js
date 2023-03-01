@@ -8,6 +8,7 @@ import {
     View,
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
+import { MaskedTextInput } from 'react-native-mask-text';
 
 const EnterNameView = ({ navigation }) => {
     const [dob, setDob] = useState('');
@@ -22,17 +23,8 @@ const EnterNameView = ({ navigation }) => {
         }
     }, [dob]);
 
-    const handleDobChange = (text) => {
-        let newDob = text;
-
-        if (newDob.length === 2) {
-            newDob = newDob + '/';
-        }
-        if (newDob.length === 5) {
-            newDob = newDob + '/';
-        }
-
-        setDob(newDob);
+    const handleDobChange = (text, rawText) => {
+        setDob(text);
     };
 
     return (
@@ -45,7 +37,38 @@ const EnterNameView = ({ navigation }) => {
                         to open a Revolut account.
                     </Text>
 
-                    <TextInput
+                    <View>
+                        <MaskedTextInput
+                            type='date'
+                            options={{
+                                dateFormat: 'MM/DD/YYYY',
+                            }}
+                            onChangeText={(text, rawText) => {
+                                handleDobChange(text, rawText);
+                            }}
+                            style={styles.input}
+                            placeholder='MM/DD/YYYY'
+                            placeholderTextColor='#777777'
+                            keyboardType='numeric'
+                            clearButtonMode='while-editing'
+                            autoFocus
+                            maxLength={8}
+                        />
+
+                        <Text
+                            style={{
+                                color: '#fff',
+                                fontSize: 16,
+                                position: 'absolute',
+                                top: 35,
+                                left: 10,
+                            }}
+                        >
+                            {dob}
+                        </Text>
+                    </View>
+
+                    {/* <TextInput
                         style={styles.input}
                         onChangeText={handleDobChange}
                         value={dob}
@@ -55,7 +78,7 @@ const EnterNameView = ({ navigation }) => {
                         clearButtonMode='while-editing'
                         autoFocus
                         maxLength={10}
-                    />
+                    /> */}
                 </View>
 
                 {/* Continue Button */}
@@ -120,10 +143,12 @@ const styles = StyleSheet.create({
     input: {
         marginTop: 20,
         backgroundColor: '#333333',
-        color: '#fff',
+        color: '#333333',
         fontSize: 16,
         height: 50,
-        padding: 10,
+        paddingTop: 10,
+        paddingBottom: 10,
+        paddingLeft: 20,
         borderRadius: 8,
     },
     continueBtn: {
