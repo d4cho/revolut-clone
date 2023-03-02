@@ -14,16 +14,28 @@ const EnterNameView = ({ navigation }) => {
 
     const [isContinue, setIsContinue] = useState(false);
 
-    useEffect(() => {
-        if (email) {
+    // useEffect(() => {
+    //     if (email) {
+    //         setIsContinue(true);
+    //     } else {
+    //         setIsContinue(false);
+    //     }
+    // }, [email]);
+
+    const handleEmailChange = (text) => {
+        setEmail(text);
+
+        if (
+            (text.includes('@') && text.includes('.com')) ||
+            text.includes('.ca') ||
+            text.includes('.net') ||
+            text.includes('.co') ||
+            text.includes('.info')
+        ) {
             setIsContinue(true);
         } else {
             setIsContinue(false);
         }
-    }, [email]);
-
-    const handleEmailChange = (text) => {
-        setEmail(text);
     };
 
     return (
