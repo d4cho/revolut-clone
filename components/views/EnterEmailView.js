@@ -72,7 +72,7 @@ const EnterNameView = ({ navigation }) => {
                             },
                         ]}
                         onPress={() => {
-                            navigation.navigate('EnterDobView');
+                            navigation.navigate('SelfieInfoView');
                         }}
                         disabled={!isContinue}
                     >

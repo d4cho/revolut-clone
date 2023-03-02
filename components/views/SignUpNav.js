@@ -12,6 +12,7 @@ import HomeAddressView from './HomeAddressView';
 import EnterNameView from './EnterNameView';
 import EnterDobView from './EnterDobView';
 import EnterEmailView from './EnterEmailView';
+import SelfieInfoView from './SelfieInfoView';
 
 const SignUpStack = createNativeStackNavigator();
 
@@ -164,6 +165,27 @@ const LoginNav = ({ navigation }) => {
             <SignUpStack.Screen
                 name='EnterEmailView'
                 component={EnterEmailView}
+                options={{
+                    animation: 'slide_from_right',
+                    headerShown: true,
+                    headerTitle: '',
+                    headerStyle: {
+                        backgroundColor: '#000',
+                    },
+                    headerLeft: () => (
+                        <HeaderBackButton
+                            onPress={() =>
+                                navigation.navigate('SignUp', {
+                                    screen: 'SignUpView',
+                                })
+                            }
+                        />
+                    ),
+                }}
+            />
+            <SignUpStack.Screen
+                name='SelfieInfoView'
+                component={SelfieInfoView}
                 options={{
                     animation: 'slide_from_right',
                     headerShown: true,
