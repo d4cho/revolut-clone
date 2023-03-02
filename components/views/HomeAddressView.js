@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {
     KeyboardAvoidingView,
     Pressable,
+    ScrollView,
     StyleSheet,
     Text,
     TextInput,
@@ -40,8 +41,8 @@ const HomeAddressView = ({ navigation, route }) => {
     }, [addressLine1, city, province]);
 
     return (
-        <KeyboardAvoidingView style={styles.container}>
-            <View style={styles.flexContainer}>
+        <View style={styles.container}>
+            <ScrollView style={styles.flexContainer}>
                 <View style={{ flex: 1 }}>
                     <Text style={styles.header}>Home address</Text>
                     <Text style={styles.subHeader}>
@@ -85,40 +86,39 @@ const HomeAddressView = ({ navigation, route }) => {
                         placeholderTextColor='#777777'
                         clearButtonMode='while-editing'
                     />
-                </View>
-
-                {/* Continue Button */}
-                <View>
-                    <Pressable
-                        style={[
-                            styles.continueBtn,
-                            {
-                                backgroundColor: isContinue
-                                    ? '#0566E9'
-                                    : '#010048',
-                            },
-                        ]}
-                        onPress={() => {
-                            navigation.navigate('EnterNameView');
-                        }}
-                        disabled={!isContinue}
-                    >
-                        <Text
+                    {/* Continue Button */}
+                    <View>
+                        <Pressable
                             style={[
-                                styles.continueBtnText,
+                                styles.continueBtn,
                                 {
-                                    color: isContinue ? '#fff' : '#777777',
+                                    backgroundColor: isContinue
+                                        ? '#0566E9'
+                                        : '#010048',
                                 },
                             ]}
+                            onPress={() => {
+                                navigation.navigate('EnterNameView');
+                            }}
+                            disabled={!isContinue}
                         >
-                            Continue
-                        </Text>
-                    </Pressable>
+                            <Text
+                                style={[
+                                    styles.continueBtnText,
+                                    {
+                                        color: isContinue ? '#fff' : '#777777',
+                                    },
+                                ]}
+                            >
+                                Continue
+                            </Text>
+                        </Pressable>
+                    </View>
                 </View>
+            </ScrollView>
 
-                <StatusBar style='light' />
-            </View>
-        </KeyboardAvoidingView>
+            <StatusBar style='light' />
+        </View>
     );
 };
 
@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
     },
     flexContainer: {
         flex: 1,
-        justifyContent: 'space-between',
+        // justifyContent: 'space-between',
     },
     header: {
         color: '#fff',

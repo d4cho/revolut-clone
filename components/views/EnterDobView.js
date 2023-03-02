@@ -8,7 +8,7 @@ import {
     View,
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { MaskedTextInput } from 'react-native-mask-text';
+// import { MaskedTextInput } from 'react-native-mask-text';
 
 const EnterNameView = ({ navigation }) => {
     const [dob, setDob] = useState('');
@@ -16,7 +16,7 @@ const EnterNameView = ({ navigation }) => {
     const [isContinue, setIsContinue] = useState(false);
 
     useEffect(() => {
-        if (dob.length === 10) {
+        if (dob.length === 8) {
             setIsContinue(true);
         } else {
             setIsContinue(false);
@@ -36,7 +36,7 @@ const EnterNameView = ({ navigation }) => {
                         As stated on your official ID. You must be 18 or older
                         to open a Revolut account.
                     </Text>
-
+                    {/* 
                     <View>
                         <MaskedTextInput
                             type='date'
@@ -46,6 +46,7 @@ const EnterNameView = ({ navigation }) => {
                             onChangeText={(text, rawText) => {
                                 handleDobChange(text, rawText);
                             }}
+                            value={dob}
                             style={styles.input}
                             placeholder='MM/DD/YYYY'
                             placeholderTextColor='#777777'
@@ -66,10 +67,15 @@ const EnterNameView = ({ navigation }) => {
                         >
                             {dob}
                         </Text>
-                    </View>
+                    </View> */}
 
-                    {/* <TextInput
-                        style={styles.input}
+                    <TextInput
+                        style={[
+                            styles.input,
+                            {
+                                color: '#fff',
+                            },
+                        ]}
                         onChangeText={handleDobChange}
                         value={dob}
                         placeholder='MM/DD/YYYY'
@@ -78,7 +84,7 @@ const EnterNameView = ({ navigation }) => {
                         clearButtonMode='while-editing'
                         autoFocus
                         maxLength={10}
-                    /> */}
+                    />
                 </View>
 
                 {/* Continue Button */}
