@@ -71,6 +71,7 @@ const SignUpView = ({ navigation }) => {
                                 textContentType='telephoneNumber'
                                 clearButtonMode='while-editing'
                                 autoFocus
+                                maxLength={10}
                             />
                         </View>
                         <Pressable

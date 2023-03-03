@@ -8,16 +8,21 @@ import {
     View,
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
+import CountryPicker, { DARK_THEME } from 'react-native-country-picker-modal';
 import { Ionicons } from '@expo/vector-icons';
+import { FontAwesome5 } from '@expo/vector-icons';
 
-const REASONS = [
-    'Spend or save daily',
-    'Spend while traveling',
-    'Send money',
-    'Gain exposure to financial assets',
-];
+const DOCUMENTS = ['Passport', 'Identity card'];
 
 const ProofIdentityView = ({ navigation }) => {
+    const [countryCode, setCountryCode] = useState('CA');
+    const [country, setCountry] = useState(null);
+
+    const onSelectCountry = (country) => {
+        setCountryCode(country.cca2);
+        setCountry(country);
+    };
+
     return (
         <KeyboardAvoidingView style={styles.container}>
             <View style={styles.flexContainer}>
@@ -28,19 +33,65 @@ const ProofIdentityView = ({ navigation }) => {
                         account.
                     </Text>
 
-                    {/* Reasons Buttons */}
+                    <Text style={styles.title}>Nationality</Text>
+                    <CountryPicker
+                        containerButtonStyle={styles.country}
+                        theme={DARK_THEME}
+                        countryCode={countryCode}
+                        withFilter={true}
+                        onSelect={onSelectCountry}
+                        withCountryNameButton={true}
+                        withFlagButton={true}
+                        visible={false}
+                    />
+
+                    <Text style={styles.title}>Select document</Text>
                     <View>
-                        {REASONS.map((reason, idx) => (
+                        {DOCUMENTS.map((document, idx) => (
                             <Pressable
                                 key={idx}
-                                style={styles.reasonBtn}
+                                style={styles.documentBtn}
                                 onPress={() => {
                                     navigation.navigate('CreatePasscodeView');
                                 }}
                             >
-                                <Text style={styles.reasonBtnText}>
-                                    {reason}
-                                </Text>
+                                <View
+                                    style={{
+                                        flexDirection: 'row',
+                                        alignItems: 'center',
+                                    }}
+                                >
+                                    <FontAwesome5
+                                        name={
+                                            document === 'Passport'
+                                                ? 'passport'
+                                                : 'id-card'
+                                        }
+                                        size={24}
+                                        color='#fff'
+                                        style={{
+                                            marginRight:
+                                                document === 'Passport'
+                                                    ? 26
+                                                    : 20,
+                                        }}
+                                    />
+                                    <View>
+                                        <Text style={styles.documentBtnText}>
+                                            {document}
+                                        </Text>
+                                        <Text
+                                            style={{
+                                                color: '#888',
+                                                marginTop: 5,
+                                            }}
+                                        >
+                                            {`Issued in ${
+                                                country?.name || 'Canada'
+                                            }`}
+                                        </Text>
+                                    </View>
+                                </View>
                                 <Ionicons
                                     name='chevron-forward'
                                     size={24}
@@ -81,18 +132,32 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontSize: 14,
     },
-    reasonBtn: {
+    title: {
+        color: '#777',
+        marginBottom: 10,
+    },
+    country: {
         width: '100%',
-        height: 50,
-        marginTop: 10,
-        paddingHorizontal: 10,
+        backgroundColor: '#333333',
+        borderRadius: 8,
+        paddingLeft: 10,
+        paddingTop: 12,
+        paddingBottom: 12,
+        justifyContent: 'center',
+        alignItems: 'flex-start',
+        marginBottom: 30,
+    },
+    documentBtn: {
+        width: '100%',
+        padding: 10,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
         borderRadius: 8,
         backgroundColor: '#333333',
+        marginBottom: 10,
     },
-    reasonBtnText: {
+    documentBtnText: {
         fontSize: 16,
         color: '#fff',
     },
