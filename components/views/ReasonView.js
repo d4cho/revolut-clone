@@ -8,22 +8,16 @@ import {
     View,
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
+import { Ionicons } from '@expo/vector-icons';
+
+const REASONS = [
+    'Spend or save daily',
+    'Spend while traveling',
+    'Send money',
+    'Gain exposure to financial assets',
+];
 
 const OccupationView = ({ navigation }) => {
-    const [occupation, setOccupation] = useState('');
-
-    const [isContinue, setIsContinue] = useState(false);
-
-    const handleOccupationChange = (text) => {
-        setOccupation(text);
-
-        if (text.length > 0) {
-            setIsContinue(true);
-        } else {
-            setIsContinue(false);
-        }
-    };
-
     return (
         <KeyboardAvoidingView style={styles.container}>
             <View style={styles.flexContainer}>
@@ -36,32 +30,25 @@ const OccupationView = ({ navigation }) => {
                         we're curious!
                     </Text>
 
+                    {/* Reasons Buttons */}
                     <View>
-                        <Pressable
-                            style={[
-                                styles.continueBtn,
-                                {
-                                    backgroundColor: isContinue
-                                        ? '#0566E9'
-                                        : '#010048',
-                                },
-                            ]}
-                            onPress={() => {
-                                navigation.navigate('SelfieInfoView');
-                            }}
-                            disabled={!isContinue}
-                        >
-                            <Text
-                                style={[
-                                    styles.continueBtnText,
-                                    {
-                                        color: isContinue ? '#fff' : '#777777',
-                                    },
-                                ]}
+                        {REASONS.map((reason, idx) => (
+                            <Pressable
+                                style={styles.reasonBtn}
+                                onPress={() => {
+                                    navigation.navigate('SelfieInfoView');
+                                }}
                             >
-                                Continue
-                            </Text>
-                        </Pressable>
+                                <Text style={styles.reasonBtnText}>
+                                    {reason}
+                                </Text>
+                                <Ionicons
+                                    name='chevron-forward'
+                                    size={24}
+                                    color='#fff'
+                                />
+                            </Pressable>
+                        ))}
                     </View>
                 </View>
 
@@ -91,33 +78,23 @@ const styles = StyleSheet.create({
     },
     subHeader: {
         marginTop: 10,
-        marginBottom: 20,
+        marginBottom: 30,
         color: '#fff',
         fontSize: 14,
     },
-    input: {
-        marginTop: 20,
-        backgroundColor: '#333333',
-        color: '#fff',
-        fontSize: 16,
-        height: 50,
-        paddingTop: 10,
-        paddingBottom: 10,
-        paddingLeft: 10,
-        borderRadius: 8,
-    },
-    continueBtn: {
+    reasonBtn: {
         width: '100%',
-        height: 40,
-        marginTop: 20,
-        justifyContent: 'center',
+        height: 50,
+        marginTop: 10,
+        paddingHorizontal: 10,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
         alignItems: 'center',
-        borderRadius: 15,
-        backgroundColor: '#010048',
+        borderRadius: 8,
+        backgroundColor: '#333333',
     },
-    continueBtnText: {
+    reasonBtnText: {
         fontSize: 16,
-        color: '#777777',
-        fontWeight: 'bold',
+        color: '#fff',
     },
 });
