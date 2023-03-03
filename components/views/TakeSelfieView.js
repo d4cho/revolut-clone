@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import {
+    Dimensions,
     KeyboardAvoidingView,
     Pressable,
     StyleSheet,
@@ -11,8 +12,11 @@ import {
 import { StatusBar } from 'expo-status-bar';
 
 import { Camera, CameraType } from 'expo-camera';
+import { Ionicons } from '@expo/vector-icons';
+import { FontAwesome5 } from '@expo/vector-icons';
 
 const TakeSelfieView = ({ navigation }) => {
+    let { width, height } = Dimensions.get('window');
     const cameraRef = useRef(null);
     const [permission, requestPermission] = Camera.useCameraPermissions();
 
@@ -57,31 +61,107 @@ const TakeSelfieView = ({ navigation }) => {
                 type={CameraType.front}
             ></Camera>
 
-            <View style={styles.overlay}>
-                <View>
-                    <Text
-                        style={styles.header}
-                        onPress={() => navigation.navigate('SelfieInfoView')}
-                    >
-                        We can see you
-                    </Text>
-                    <Text style={styles.subHeader}>Take your selfie</Text>
-                </View>
-            </View>
+            {isPaused ? (
+                <>
+                    <View
+                        style={{
+                            position: 'absolute',
+                            top: -142,
+                            bottom: -142,
+                            left: -265,
+                            right: -265,
+                            backgroundColor: 'transparent',
 
-            <View style={styles.faceOutlineWrapper}>
-                <View style={styles.faceOutline}></View>
-            </View>
+                            borderWidth: 400,
+                            borderRadius: 1000,
+                            borderColor: '#000',
+                            // opacity: 0.5,
+                        }}
+                    />
 
-            <View style={styles.takePictureBtnWrapper}>
-                {/* Continue Button */}
-                <Pressable
-                    style={styles.continueBtn}
-                    onPress={() => handleButtonClick()}
-                >
-                    <View style={styles.circle}></View>
-                </Pressable>
-            </View>
+                    <View style={styles.overlay}>
+                        <View>
+                            <Text
+                                style={styles.header}
+                                onPress={() =>
+                                    navigation.navigate('SelfieInfoView')
+                                }
+                            >
+                                All clear?
+                            </Text>
+                            <Text style={styles.subHeader}>
+                                Take another picture if your selfie is blurry or
+                                unclear.
+                            </Text>
+                        </View>
+                    </View>
+
+                    <View style={styles.takePictureBtnWrapper}>
+                        <Pressable
+                            style={styles.clearBtn}
+                            onPress={() => {
+                                navigation.navigate('TakeSelfieView');
+                            }}
+                        >
+                            <Ionicons
+                                name='checkmark'
+                                size={24}
+                                color='#fff'
+                                style={{ marginRight: 10 }}
+                            />
+                            <Text style={styles.clearBtnText}>
+                                My selfie is clear
+                            </Text>
+                        </Pressable>
+                        <Pressable
+                            style={styles.retakeBtn}
+                            onPress={() => handleButtonClick()}
+                        >
+                            <FontAwesome5
+                                name='redo'
+                                size={20}
+                                color='#0566E9'
+                                style={{ marginRight: 10 }}
+                            />
+                            <Text style={styles.retakeBtnText}>
+                                Retake photo
+                            </Text>
+                        </Pressable>
+                    </View>
+                </>
+            ) : (
+                <>
+                    <View style={styles.overlay}>
+                        <View>
+                            <Text
+                                style={styles.header}
+                                onPress={() =>
+                                    navigation.navigate('SelfieInfoView')
+                                }
+                            >
+                                All clear?
+                            </Text>
+                            <Text style={styles.subHeader}>
+                                Take another picture if your selfie is blurry or
+                                unclear.
+                            </Text>
+                        </View>
+                    </View>
+
+                    <View style={styles.faceOutlineWrapper}>
+                        <View style={styles.faceOutline}></View>
+                    </View>
+
+                    <View style={styles.takePictureBtnWrapper}>
+                        <Pressable
+                            style={styles.takePictureBtn}
+                            onPress={() => handleButtonClick()}
+                        >
+                            <View style={styles.circle}></View>
+                        </Pressable>
+                    </View>
+                </>
+            )}
 
             <StatusBar style='light' />
         </View>
@@ -137,8 +217,9 @@ const styles = StyleSheet.create({
         bottom: 50,
         width: '100%',
         alignItems: 'center',
+        paddingHorizontal: 10,
     },
-    continueBtn: {
+    takePictureBtn: {
         width: 75,
         height: 75,
         justifyContent: 'center',
@@ -155,5 +236,35 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         borderColor: '#000',
         borderWidth: 2,
+    },
+    clearBtn: {
+        width: '100%',
+        height: 40,
+        marginTop: 20,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 15,
+        backgroundColor: '#0566E9',
+    },
+    clearBtnText: {
+        fontSize: 16,
+        color: '#fff',
+        fontWeight: 'bold',
+    },
+    retakeBtn: {
+        width: '100%',
+        height: 40,
+        marginTop: 20,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 15,
+        backgroundColor: 'transparent',
+    },
+    retakeBtnText: {
+        fontSize: 16,
+        color: '#0566E9',
+        fontWeight: 'bold',
     },
 });
