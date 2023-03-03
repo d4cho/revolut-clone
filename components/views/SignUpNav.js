@@ -156,7 +156,7 @@ const LoginNav = ({ navigation }) => {
                         <HeaderBackButton
                             onPress={() =>
                                 navigation.navigate('SignUp', {
-                                    screen: 'SignUpView',
+                                    screen: 'EnterNameView',
                                 })
                             }
                         />
@@ -177,7 +177,7 @@ const LoginNav = ({ navigation }) => {
                         <HeaderBackButton
                             onPress={() =>
                                 navigation.navigate('SignUp', {
-                                    screen: 'SignUpView',
+                                    screen: 'EnterDobView',
                                 })
                             }
                         />
@@ -198,7 +198,7 @@ const LoginNav = ({ navigation }) => {
                         <HeaderBackButton
                             onPress={() =>
                                 navigation.navigate('SignUp', {
-                                    screen: 'SignUpView',
+                                    screen: 'EnterEmailView',
                                 })
                             }
                         />
@@ -219,7 +219,7 @@ const LoginNav = ({ navigation }) => {
                         <HeaderBackButton
                             onPress={() =>
                                 navigation.navigate('SignUp', {
-                                    screen: 'SignUpView',
+                                    screen: 'SelfieInfoView',
                                 })
                             }
                         />

@@ -83,7 +83,7 @@ const EnterNameView = ({ navigation }) => {
                         placeholderTextColor='#777777'
                         clearButtonMode='while-editing'
                         autoFocus
-                        maxLength={10}
+                        maxLength={8}
                     />
                 </View>
 

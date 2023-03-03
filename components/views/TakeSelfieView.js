@@ -133,17 +133,9 @@ const TakeSelfieView = ({ navigation }) => {
                 <>
                     <View style={styles.overlay}>
                         <View>
-                            <Text
-                                style={styles.header}
-                                onPress={() =>
-                                    navigation.navigate('SelfieInfoView')
-                                }
-                            >
-                                All clear?
-                            </Text>
+                            <Text style={styles.header}>We can see you</Text>
                             <Text style={styles.subHeader}>
-                                Take another picture if your selfie is blurry or
-                                unclear.
+                                Take your selfie
                             </Text>
                         </View>
                     </View>
@@ -159,6 +151,13 @@ const TakeSelfieView = ({ navigation }) => {
                         >
                             <View style={styles.circle}></View>
                         </Pressable>
+
+                        <Text
+                            style={{ color: '#fff', marginTop: 20 }}
+                            onPress={() => alert('test')}
+                        >
+                            GO NEXT (dev only)
+                        </Text>
                     </View>
                 </>
             )}
