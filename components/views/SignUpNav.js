@@ -16,6 +16,9 @@ import SelfieInfoView from './SelfieInfoView';
 import TakeSelfieView from './TakeSelfieView';
 import OccupationView from './OccupationView';
 import ReasonView from './ReasonView';
+import CreatePasscodeView from './CreatePasscodeView';
+import ConfirmPasscodeView from './ConfirmPasscodeView';
+import ProofIdentityView from './ProofIdentityView';
 
 const SignUpStack = createNativeStackNavigator();
 
@@ -270,12 +273,11 @@ const LoginNav = ({ navigation }) => {
                     ),
                 }}
             />
-
             <SignUpStack.Screen
-                name='EnterPasscode'
-                component={EnterPasscodeView}
+                name='CreatePasscodeView'
+                component={CreatePasscodeView}
                 options={{
-                    animation: 'fade',
+                    animation: 'slide_from_right',
                     headerShown: true,
                     headerTitle: '',
                     headerStyle: {
@@ -285,7 +287,49 @@ const LoginNav = ({ navigation }) => {
                         <HeaderBackButton
                             onPress={() =>
                                 navigation.navigate('SignUp', {
-                                    screen: 'SignUpView',
+                                    screen: 'ReasonView',
+                                })
+                            }
+                        />
+                    ),
+                }}
+            />
+            <SignUpStack.Screen
+                name='ConfirmPasscodeView'
+                component={ConfirmPasscodeView}
+                options={{
+                    animation: 'slide_from_right',
+                    headerShown: true,
+                    headerTitle: '',
+                    headerStyle: {
+                        backgroundColor: '#000',
+                    },
+                    headerLeft: () => (
+                        <HeaderBackButton
+                            onPress={() =>
+                                navigation.navigate('SignUp', {
+                                    screen: 'CreatePasscodeView',
+                                })
+                            }
+                        />
+                    ),
+                }}
+            />
+            <SignUpStack.Screen
+                name='ProofIdentityView'
+                component={ProofIdentityView}
+                options={{
+                    animation: 'slide_from_right',
+                    headerShown: true,
+                    headerTitle: '',
+                    headerStyle: {
+                        backgroundColor: '#000',
+                    },
+                    headerLeft: () => (
+                        <HeaderBackButton
+                            onPress={() =>
+                                navigation.navigate('SignUp', {
+                                    screen: 'CreatePasscodeView',
                                 })
                             }
                         />

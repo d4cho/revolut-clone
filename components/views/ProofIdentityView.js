@@ -17,17 +17,15 @@ const REASONS = [
     'Gain exposure to financial assets',
 ];
 
-const OccupationView = ({ navigation }) => {
+const ProofIdentityView = ({ navigation }) => {
     return (
         <KeyboardAvoidingView style={styles.container}>
             <View style={styles.flexContainer}>
                 <View style={{ flex: 1 }}>
-                    <Text style={styles.header}>
-                        Main reason for using Revolut
-                    </Text>
+                    <Text style={styles.header}>Proof of identity</Text>
                     <Text style={styles.subHeader}>
-                        We need to know this for regulatory reasons. And also,
-                        we're curious!
+                        We need to prove who you are before you can use your
+                        account.
                     </Text>
 
                     {/* Reasons Buttons */}
@@ -59,7 +57,7 @@ const OccupationView = ({ navigation }) => {
     );
 };
 
-export default OccupationView;
+export default ProofIdentityView;
 
 const styles = StyleSheet.create({
     container: {
