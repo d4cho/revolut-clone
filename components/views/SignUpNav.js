@@ -14,6 +14,8 @@ import EnterDobView from './EnterDobView';
 import EnterEmailView from './EnterEmailView';
 import SelfieInfoView from './SelfieInfoView';
 import TakeSelfieView from './TakeSelfieView';
+import OccupationView from './OccupationView';
+import ReasonView from './ReasonView';
 
 const SignUpStack = createNativeStackNavigator();
 
@@ -220,6 +222,48 @@ const LoginNav = ({ navigation }) => {
                             onPress={() =>
                                 navigation.navigate('SignUp', {
                                     screen: 'SelfieInfoView',
+                                })
+                            }
+                        />
+                    ),
+                }}
+            />
+            <SignUpStack.Screen
+                name='OccupationView'
+                component={OccupationView}
+                options={{
+                    animation: 'slide_from_right',
+                    headerShown: true,
+                    headerTitle: '',
+                    headerStyle: {
+                        backgroundColor: '#000',
+                    },
+                    headerLeft: () => (
+                        <HeaderBackButton
+                            onPress={() =>
+                                navigation.navigate('SignUp', {
+                                    screen: 'TakeSelfieView',
+                                })
+                            }
+                        />
+                    ),
+                }}
+            />
+            <SignUpStack.Screen
+                name='ReasonView'
+                component={ReasonView}
+                options={{
+                    animation: 'slide_from_right',
+                    headerShown: true,
+                    headerTitle: '',
+                    headerStyle: {
+                        backgroundColor: '#000',
+                    },
+                    headerLeft: () => (
+                        <HeaderBackButton
+                            onPress={() =>
+                                navigation.navigate('SignUp', {
+                                    screen: 'OccupationView',
                                 })
                             }
                         />

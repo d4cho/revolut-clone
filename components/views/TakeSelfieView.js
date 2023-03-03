@@ -1,14 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import {
-    Dimensions,
-    KeyboardAvoidingView,
-    Pressable,
-    StyleSheet,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View,
-} from 'react-native';
+import { Dimensions, Pressable, StyleSheet, Text, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 
 import { Camera, CameraType } from 'expo-camera';
@@ -16,7 +7,6 @@ import { Ionicons } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 
 const TakeSelfieView = ({ navigation }) => {
-    let { width, height } = Dimensions.get('window');
     const cameraRef = useRef(null);
     const [permission, requestPermission] = Camera.useCameraPermissions();
 
@@ -154,7 +144,9 @@ const TakeSelfieView = ({ navigation }) => {
 
                         <Text
                             style={{ color: '#fff', marginTop: 20 }}
-                            onPress={() => alert('test')}
+                            onPress={() =>
+                                navigation.navigate('OccupationView')
+                            }
                         >
                             GO NEXT (dev only)
                         </Text>
