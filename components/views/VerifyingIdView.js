@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import {
-    KeyboardAvoidingView,
-    Pressable,
-    StyleSheet,
-    Text,
-    TextInput,
-    View,
-} from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
+import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
 const VerifyingIdView = ({ navigation }) => {
+    const [fill, setFill] = useState(0);
+
+    useEffect(() => {
+        if (fill < 100) {
+            setTimeout(() => {
+                setFill(fill + 10);
+            }, 1000);
+        }
+    }, [fill]);
+
     return (
         <View style={styles.container}>
             <View style={styles.flexContainer}>
@@ -22,10 +26,26 @@ const VerifyingIdView = ({ navigation }) => {
                     </Text>
                 </View>
 
-                <View>
-                    <Text style={styles.subHeader}>
-                        progress spinner goes here
-                    </Text>
+                <View style={{ alignItems: 'center' }}>
+                    <AnimatedCircularProgress
+                        size={200}
+                        width={12}
+                        fill={fill}
+                        tintColor='#0566E9'
+                        backgroundColor='#333'
+                        rotation={0}
+                    >
+                        {(fill) => (
+                            <View style={{ flexDirection: 'row' }}>
+                                <Text style={{ color: '#fff', fontSize: 50 }}>
+                                    {fill.toFixed(0)}
+                                </Text>
+                                <Text style={{ color: '#fff', fontSize: 20 }}>
+                                    %
+                                </Text>
+                            </View>
+                        )}
+                    </AnimatedCircularProgress>
                 </View>
 
                 <View>
