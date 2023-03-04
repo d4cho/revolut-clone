@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
         margin: 15,
         width: 15,
         height: 15,
-        borderRadius: '50%',
+        borderRadius: 50,
         backgroundColor: '#04017d',
     },
     forgot: {

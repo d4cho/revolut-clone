@@ -6,7 +6,8 @@ import { Camera, CameraType } from 'expo-camera';
 import { Ionicons } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 
-const TakeSelfieView = ({ navigation }) => {
+const TakePhotoView = ({ navigation, route }) => {
+    const { document } = route?.params;
     const cameraRef = useRef(null);
     const [permission, requestPermission] = Camera.useCameraPermissions();
 
@@ -39,8 +40,6 @@ const TakeSelfieView = ({ navigation }) => {
         } else {
             cameraRef.current.pausePreview();
         }
-
-        // navigation.navigate('SelfieInfoView');
     };
 
     return (
@@ -48,49 +47,48 @@ const TakeSelfieView = ({ navigation }) => {
             <Camera
                 ref={cameraRef}
                 style={styles.camera}
-                type={CameraType.front}
+                type={CameraType.back}
             ></Camera>
 
-            {isPaused ? (
-                <>
-                    <View
-                        style={{
-                            position: 'absolute',
-                            top: -142,
-                            bottom: -142,
-                            left: -265,
-                            right: -265,
-                            backgroundColor: 'transparent',
+            <>
+                <View
+                    style={{
+                        position: 'absolute',
+                        top: -440,
+                        bottom: -53,
+                        left: -490,
+                        right: -490,
+                        backgroundColor: 'transparent',
 
-                            borderWidth: 400,
-                            borderRadius: 1000,
-                            borderColor: '#000',
-                            // opacity: 0.5,
-                        }}
-                    />
+                        borderWidth: 500,
+                        borderRadius: 5,
+                        borderColor: '#000',
+                        opacity: 0.9,
+                    }}
+                />
 
-                    <View style={styles.overlay}>
-                        <View>
-                            <Text
-                                style={styles.header}
-                                onPress={() =>
-                                    navigation.navigate('SelfieInfoView')
-                                }
-                            >
-                                All clear?
-                            </Text>
-                            <Text style={styles.subHeader}>
-                                Take another picture if your selfie is blurry or
-                                unclear.
-                            </Text>
-                        </View>
+                <View style={styles.photoOutlineWrapper}>
+                    <View style={styles.photoOutline}></View>
+                    <View style={styles.textWrapper}>
+                        <Text style={styles.documentType}>
+                            {document === 'Passport'
+                                ? 'Passport page'
+                                : 'Front of card'}
+                        </Text>
+                        <Text style={styles.instructionsText}>
+                            {`Position all 4 corners of the ${
+                                document === 'Passport' ? 'page' : 'card'
+                            } clearly in the frame and remove any cover`}
+                        </Text>
                     </View>
+                </View>
 
+                {isPaused ? (
                     <View style={styles.takePictureBtnWrapper}>
                         <Pressable
                             style={styles.clearBtn}
                             onPress={() => {
-                                navigation.navigate('OccupationView');
+                                navigation.navigate('VerifyingIdView');
                             }}
                         >
                             <Ionicons
@@ -100,7 +98,7 @@ const TakeSelfieView = ({ navigation }) => {
                                 style={{ marginRight: 10 }}
                             />
                             <Text style={styles.clearBtnText}>
-                                My selfie is clear
+                                My photo is readable
                             </Text>
                         </Pressable>
                         <Pressable
@@ -114,26 +112,11 @@ const TakeSelfieView = ({ navigation }) => {
                                 style={{ marginRight: 10 }}
                             />
                             <Text style={styles.retakeBtnText}>
-                                Retake photo
+                                Take a new photo
                             </Text>
                         </Pressable>
                     </View>
-                </>
-            ) : (
-                <>
-                    <View style={styles.overlay}>
-                        <View>
-                            <Text style={styles.header}>We can see you</Text>
-                            <Text style={styles.subHeader}>
-                                Take your selfie
-                            </Text>
-                        </View>
-                    </View>
-
-                    <View style={styles.faceOutlineWrapper}>
-                        <View style={styles.faceOutline}></View>
-                    </View>
-
+                ) : (
                     <View style={styles.takePictureBtnWrapper}>
                         <Pressable
                             style={styles.takePictureBtn}
@@ -145,21 +128,21 @@ const TakeSelfieView = ({ navigation }) => {
                         <Text
                             style={{ color: '#fff', marginTop: 20 }}
                             onPress={() =>
-                                navigation.navigate('OccupationView')
+                                navigation.navigate('VerifyingIdView')
                             }
                         >
                             GO NEXT (dev only)
                         </Text>
                     </View>
-                </>
-            )}
+                )}
+            </>
 
             <StatusBar style='light' />
         </View>
     );
 };
 
-export default TakeSelfieView;
+export default TakePhotoView;
 
 const styles = StyleSheet.create({
     container: {
@@ -169,39 +152,36 @@ const styles = StyleSheet.create({
     camera: {
         flex: 1,
     },
-    overlay: {
-        position: 'absolute',
-        width: '100%',
-        height: '100%',
-        justifyContent: 'space-between',
+    photoOutlineWrapper: {
         paddingHorizontal: 10,
-    },
-    header: {
-        width: '100%',
-        color: '#fff',
-        fontSize: 35,
-        fontWeight: 'bold',
-    },
-    subHeader: {
-        width: '100%',
-        marginTop: 10,
-        marginBottom: 20,
-        color: '#fff',
-        fontSize: 14,
-    },
-    faceOutlineWrapper: {
         position: 'absolute',
+        top: 0,
+        left: 0,
         width: '100%',
         height: '100%',
-        justifyContent: 'center',
         alignItems: 'center',
     },
-    faceOutline: {
-        borderColor: '#32E08E',
-        borderWidth: 5,
-        width: 150,
+    photoOutline: {
+        marginTop: 60,
+        borderColor: '#fff',
+        borderWidth: 1,
+        width: '100%',
         height: 250,
-        borderRadius: 100,
+        borderRadius: 5,
+    },
+    textWrapper: {
+        marginTop: 50,
+    },
+    documentType: {
+        color: '#fff',
+        textAlign: 'center',
+        fontSize: 24,
+        marginBottom: 20,
+    },
+    instructionsText: {
+        color: '#fff',
+        textAlign: 'center',
+        fontSize: 16,
     },
     takePictureBtnWrapper: {
         position: 'absolute',

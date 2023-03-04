@@ -3,7 +3,6 @@ import { StyleSheet } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import HeaderBackButton from '../atoms/HeaderBackButton';
-import EnterPasscodeView from './EnterPasscodeView';
 import SignUpView from './SignUpView';
 import PhoneCodeView from './PhoneCodeView';
 import CountryPickView from './CountryPickView';
@@ -19,6 +18,8 @@ import ReasonView from './ReasonView';
 import CreatePasscodeView from './CreatePasscodeView';
 import ConfirmPasscodeView from './ConfirmPasscodeView';
 import ProofIdentityView from './ProofIdentityView';
+import TakeIdPhotoView from './TakeIdPhotoView';
+import VerifyingIdView from './VerifyingIdView';
 
 const SignUpStack = createNativeStackNavigator();
 
@@ -245,7 +246,7 @@ const LoginNav = ({ navigation }) => {
                         <HeaderBackButton
                             onPress={() =>
                                 navigation.navigate('SignUp', {
-                                    screen: 'TakeSelfieView',
+                                    screen: 'SelfieInfoView',
                                 })
                             }
                         />
@@ -330,6 +331,48 @@ const LoginNav = ({ navigation }) => {
                             onPress={() =>
                                 navigation.navigate('SignUp', {
                                     screen: 'CreatePasscodeView',
+                                })
+                            }
+                        />
+                    ),
+                }}
+            />
+            <SignUpStack.Screen
+                name='TakeIdPhotoView'
+                component={TakeIdPhotoView}
+                options={{
+                    animation: 'slide_from_right',
+                    headerShown: true,
+                    headerTitle: '',
+                    headerStyle: {
+                        backgroundColor: '#000',
+                    },
+                    headerLeft: () => (
+                        <HeaderBackButton
+                            onPress={() =>
+                                navigation.navigate('SignUp', {
+                                    screen: 'ProofIdentityView',
+                                })
+                            }
+                        />
+                    ),
+                }}
+            />
+            <SignUpStack.Screen
+                name='VerifyingIdView'
+                component={VerifyingIdView}
+                options={{
+                    animation: 'slide_from_right',
+                    headerShown: true,
+                    headerTitle: '',
+                    headerStyle: {
+                        backgroundColor: '#000',
+                    },
+                    headerLeft: () => (
+                        <HeaderBackButton
+                            onPress={() =>
+                                navigation.navigate('SignUp', {
+                                    screen: 'ProofIdentityView',
                                 })
                             }
                         />
