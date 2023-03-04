@@ -12,7 +12,7 @@ import CountryPicker, { DARK_THEME } from 'react-native-country-picker-modal';
 import { Ionicons } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 
-const DOCUMENTS = ['Passport', 'Identity card'];
+const DOCUMENTS = ['Driving license', 'Passport', 'Identity card'];
 
 const ProofIdentityView = ({ navigation }) => {
     const [countryCode, setCountryCode] = useState('CA');
@@ -28,10 +28,11 @@ const ProofIdentityView = ({ navigation }) => {
             <View style={styles.flexContainer}>
                 <View style={{ flex: 1 }}>
                     <Text style={styles.header}>Proof of identity</Text>
-                    <Text style={styles.subHeader}>
-                        We need to prove who you are before you can use your
-                        account.
-                    </Text>
+                    <Text
+                        style={styles.subHeader}
+                    >{`We need a valid document to confirm you reside in ${
+                        country?.name || 'Canada'
+                    } and verify who you are. Data is processed securely.`}</Text>
 
                     <Text style={styles.title}>Nationality</Text>
                     <CountryPicker
@@ -63,7 +64,9 @@ const ProofIdentityView = ({ navigation }) => {
                                 >
                                     <FontAwesome5
                                         name={
-                                            document === 'Passport'
+                                            document === 'Driving license'
+                                                ? 'car'
+                                                : document === 'Passport'
                                                 ? 'passport'
                                                 : 'id-card'
                                         }
