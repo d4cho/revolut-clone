@@ -11,9 +11,9 @@ import { StatusBar } from 'expo-status-bar';
 
 const VerifyingIdView = ({ navigation }) => {
     return (
-        <KeyboardAvoidingView style={styles.container}>
+        <View style={styles.container}>
             <View style={styles.flexContainer}>
-                <View style={{ flex: 1 }}>
+                <View>
                     <Text style={styles.header}>
                         We're verifying your identity
                     </Text>
@@ -22,7 +22,12 @@ const VerifyingIdView = ({ navigation }) => {
                     </Text>
                 </View>
 
-                {/* Continue Button */}
+                <View>
+                    <Text style={styles.subHeader}>
+                        progress spinner goes here
+                    </Text>
+                </View>
+
                 <View>
                     <Pressable
                         style={styles.continueBtn}
@@ -33,10 +38,10 @@ const VerifyingIdView = ({ navigation }) => {
                         <Text style={styles.continueBtnText}>Continue</Text>
                     </Pressable>
                 </View>
-
-                <StatusBar style='light' />
             </View>
-        </KeyboardAvoidingView>
+
+            <StatusBar style='light' />
+        </View>
     );
 };
 
