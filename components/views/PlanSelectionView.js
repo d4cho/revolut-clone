@@ -83,7 +83,7 @@ const PlanSelectionView = ({ navigation }) => {
                 <Pressable
                     style={styles.continueBtn}
                     onPress={() => {
-                        navigation.navigate('VerifyingIdView');
+                        navigation.navigate('DeliverCardView');
                     }}
                 >
                     <Text style={styles.continueBtnText}>
