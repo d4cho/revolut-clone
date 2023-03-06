@@ -36,7 +36,12 @@ const SignUpView = ({ navigation }) => {
         <GestureHandlerRootView style={styles.container}>
             <KeyboardAvoidingView style={styles.flexContainer}>
                 <View style={{ flex: 1 }}>
-                    <Text style={styles.header}>Let's get started!</Text>
+                    <Text
+                        style={styles.header}
+                        onPress={() => navigation.navigate('PlanSelectionView')}
+                    >
+                        Let's get started!
+                    </Text>
                     <Text style={styles.subHeader}>
                         Enter your phone number. We will send you a confirmation
                         code there

@@ -20,6 +20,7 @@ import ConfirmPasscodeView from './ConfirmPasscodeView';
 import ProofIdentityView from './ProofIdentityView';
 import TakeIdPhotoView from './TakeIdPhotoView';
 import VerifyingIdView from './VerifyingIdView';
+import PlanSelectionView from './PlanSelectionView';
 
 const SignUpStack = createNativeStackNavigator();
 
@@ -373,6 +374,27 @@ const LoginNav = ({ navigation }) => {
                             onPress={() =>
                                 navigation.navigate('SignUp', {
                                     screen: 'ProofIdentityView',
+                                })
+                            }
+                        />
+                    ),
+                }}
+            />
+            <SignUpStack.Screen
+                name='PlanSelectionView'
+                component={PlanSelectionView}
+                options={{
+                    animation: 'slide_from_right',
+                    headerShown: true,
+                    headerTitle: '',
+                    headerStyle: {
+                        backgroundColor: '#000',
+                    },
+                    headerLeft: () => (
+                        <HeaderBackButton
+                            onPress={() =>
+                                navigation.navigate('SignUp', {
+                                    screen: 'VerifyingIdView',
                                 })
                             }
                         />

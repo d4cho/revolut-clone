@@ -52,7 +52,7 @@ const VerifyingIdView = ({ navigation }) => {
                     <Pressable
                         style={styles.continueBtn}
                         onPress={() => {
-                            navigation.navigate('ProofIdentityView');
+                            navigation.navigate('PlanSelectionView');
                         }}
                     >
                         <Text style={styles.continueBtnText}>Continue</Text>
