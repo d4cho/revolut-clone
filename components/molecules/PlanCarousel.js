@@ -52,7 +52,7 @@ const PlanCarousel = ({ planData, setSelectedPlan }) => {
     return (
         <Carousel
             ref={carouselRef}
-            loop={false}
+            loop={true}
             width={width}
             data={planData}
             scrollAnimationDuration={200}

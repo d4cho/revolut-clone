@@ -15,6 +15,7 @@ import plan1Img from '../../assets/images/plan1.jpg';
 import plan2Img from '../../assets/images/plan2.jpg';
 import plan3Img from '../../assets/images/plan3.jpg';
 import plan4Img from '../../assets/images/plan4.jpg';
+import PlanAccordion from '../molecules/PlanAccordion';
 
 const PLAN_DATA = [
     {
@@ -23,6 +24,68 @@ const PLAN_DATA = [
         img: plan1Img,
         isPopular: false,
         price: '$13.99',
+        menuItems: [
+            {
+                heading: 'Everyday Benefits',
+                contentItems: [
+                    {
+                        icon: 'credit-card-alt',
+                        title: 'Personalized Metal Card',
+                        desc: 'Coming soon',
+                    },
+                    {
+                        icon: 'money',
+                        title: 'Metal Cashback',
+                        desc: '0.1% cashback within Europe and 1% outside of Europe',
+                    },
+                    {
+                        icon: 'child',
+                        title: 'Revolut Junior',
+                        desc: 'Unlock all Junior features. Create up to 5 junior accounts',
+                    },
+                ],
+            },
+            {
+                heading: 'Everyday Protection',
+                contentItems: [
+                    {
+                        icon: 'credit-card-alt',
+                        title: 'Personalized Metal Card',
+                        desc: 'Coming soon',
+                    },
+                    {
+                        icon: 'money',
+                        title: 'Metal Cashback',
+                        desc: '0.1% cashback within Europe and 1% outside of Europe',
+                    },
+                    {
+                        icon: 'child',
+                        title: 'Revolut Junior',
+                        desc: 'Unlock all Junior features. Create up to 5 junior accounts',
+                    },
+                ],
+            },
+            {
+                heading: 'Travel Savings and Protection',
+                contentItems: [
+                    {
+                        icon: 'credit-card-alt',
+                        title: 'Personalized Metal Card',
+                        desc: 'Coming soon',
+                    },
+                    {
+                        icon: 'money',
+                        title: 'Metal Cashback',
+                        desc: '0.1% cashback within Europe and 1% outside of Europe',
+                    },
+                    {
+                        icon: 'child',
+                        title: 'Revolut Junior',
+                        desc: 'Unlock all Junior features. Create up to 5 junior accounts',
+                    },
+                ],
+            },
+        ],
     },
     {
         title: 'Premium',
@@ -30,6 +93,68 @@ const PLAN_DATA = [
         img: plan2Img,
         isPopular: true,
         price: '$7.99',
+        menuItems: [
+            {
+                heading: 'Everyday Benefits',
+                contentItems: [
+                    {
+                        icon: 'credit-card-alt',
+                        title: 'Personalized Metal Card',
+                        desc: 'Coming soon',
+                    },
+                    {
+                        icon: 'money',
+                        title: 'Metal Cashback',
+                        desc: '0.1% cashback within Europe and 1% outside of Europe',
+                    },
+                    {
+                        icon: 'child',
+                        title: 'Revolut Junior',
+                        desc: 'Unlock all Junior features. Create up to 5 junior accounts',
+                    },
+                ],
+            },
+            {
+                heading: 'Everyday Protection',
+                contentItems: [
+                    {
+                        icon: 'credit-card-alt',
+                        title: 'Personalized Metal Card',
+                        desc: 'Coming soon',
+                    },
+                    {
+                        icon: 'money',
+                        title: 'Metal Cashback',
+                        desc: '0.1% cashback within Europe and 1% outside of Europe',
+                    },
+                    {
+                        icon: 'child',
+                        title: 'Revolut Junior',
+                        desc: 'Unlock all Junior features. Create up to 5 junior accounts',
+                    },
+                ],
+            },
+            {
+                heading: 'Travel Savings and Protection',
+                contentItems: [
+                    {
+                        icon: 'credit-card-alt',
+                        title: 'Personalized Metal Card',
+                        desc: 'Coming soon',
+                    },
+                    {
+                        icon: 'money',
+                        title: 'Metal Cashback',
+                        desc: '0.1% cashback within Europe and 1% outside of Europe',
+                    },
+                    {
+                        icon: 'child',
+                        title: 'Revolut Junior',
+                        desc: 'Unlock all Junior features. Create up to 5 junior accounts',
+                    },
+                ],
+            },
+        ],
     },
     {
         title: 'Plus',
@@ -37,6 +162,68 @@ const PLAN_DATA = [
         img: plan3Img,
         isPopular: false,
         price: '$2.99',
+        menuItems: [
+            {
+                heading: 'Everyday Benefits',
+                contentItems: [
+                    {
+                        icon: 'credit-card-alt',
+                        title: 'Personalized Metal Card',
+                        desc: 'Coming soon',
+                    },
+                    {
+                        icon: 'money',
+                        title: 'Metal Cashback',
+                        desc: '0.1% cashback within Europe and 1% outside of Europe',
+                    },
+                    {
+                        icon: 'child',
+                        title: 'Revolut Junior',
+                        desc: 'Unlock all Junior features. Create up to 5 junior accounts',
+                    },
+                ],
+            },
+            {
+                heading: 'Everyday Protection',
+                contentItems: [
+                    {
+                        icon: 'credit-card-alt',
+                        title: 'Personalized Metal Card',
+                        desc: 'Coming soon',
+                    },
+                    {
+                        icon: 'money',
+                        title: 'Metal Cashback',
+                        desc: '0.1% cashback within Europe and 1% outside of Europe',
+                    },
+                    {
+                        icon: 'child',
+                        title: 'Revolut Junior',
+                        desc: 'Unlock all Junior features. Create up to 5 junior accounts',
+                    },
+                ],
+            },
+            {
+                heading: 'Travel Savings and Protection',
+                contentItems: [
+                    {
+                        icon: 'credit-card-alt',
+                        title: 'Personalized Metal Card',
+                        desc: 'Coming soon',
+                    },
+                    {
+                        icon: 'money',
+                        title: 'Metal Cashback',
+                        desc: '0.1% cashback within Europe and 1% outside of Europe',
+                    },
+                    {
+                        icon: 'child',
+                        title: 'Revolut Junior',
+                        desc: 'Unlock all Junior features. Create up to 5 junior accounts',
+                    },
+                ],
+            },
+        ],
     },
     {
         title: 'Standard',
@@ -44,6 +231,48 @@ const PLAN_DATA = [
         img: plan4Img,
         isPopular: false,
         price: 'free',
+        menuItems: [
+            {
+                heading: 'Everyday Benefits',
+                contentItems: [
+                    {
+                        icon: 'credit-card-alt',
+                        title: 'Personalized Metal Card',
+                        desc: 'Coming soon',
+                    },
+                    {
+                        icon: 'money',
+                        title: 'Metal Cashback',
+                        desc: '0.1% cashback within Europe and 1% outside of Europe',
+                    },
+                    {
+                        icon: 'child',
+                        title: 'Revolut Junior',
+                        desc: 'Unlock all Junior features. Create up to 5 junior accounts',
+                    },
+                ],
+            },
+            {
+                heading: 'Travel Savings and Protection',
+                contentItems: [
+                    {
+                        icon: 'credit-card-alt',
+                        title: 'Personalized Metal Card',
+                        desc: 'Coming soon',
+                    },
+                    {
+                        icon: 'money',
+                        title: 'Metal Cashback',
+                        desc: '0.1% cashback within Europe and 1% outside of Europe',
+                    },
+                    {
+                        icon: 'child',
+                        title: 'Revolut Junior',
+                        desc: 'Unlock all Junior features. Create up to 5 junior accounts',
+                    },
+                ],
+            },
+        ],
     },
 ];
 
@@ -59,23 +288,11 @@ const PlanSelectionView = ({ navigation }) => {
                 />
             </View>
             <ScrollView style={styles.accordionWrapper}>
-                <Text style={styles.header}>{'Accordion' + selectedPlan}</Text>
-                <Text style={styles.header}>{'Accordion' + selectedPlan}</Text>
-                <Text style={styles.header}>{'Accordion' + selectedPlan}</Text>
-                <Text style={styles.header}>{'Accordion' + selectedPlan}</Text>
-                <Text style={styles.header}>{'Accordion' + selectedPlan}</Text>
-                <Text style={styles.header}>{'Accordion' + selectedPlan}</Text>
-                <Text style={styles.header}>{'Accordion' + selectedPlan}</Text>
-                <Text style={styles.header}>{'Accordion' + selectedPlan}</Text>
-                <Text style={styles.header}>{'Accordion' + selectedPlan}</Text>
-                <Text style={styles.header}>{'Accordion' + selectedPlan}</Text>
-                <Text style={styles.header}>{'Accordion' + selectedPlan}</Text>
-                <Text style={styles.header}>{'Accordion' + selectedPlan}</Text>
-                <Text style={styles.header}>{'Accordion' + selectedPlan}</Text>
-                <Text style={styles.header}>{'Accordion' + selectedPlan}</Text>
-                <Text style={styles.header}>{'Accordion' + selectedPlan}</Text>
-                <Text style={styles.header}>{'Accordion' + selectedPlan}</Text>
-                <Text style={styles.header}>{'Accordion' + selectedPlan}</Text>
+                {PLAN_DATA[selectedPlan].menuItems.map((item, idx) => (
+                    <View key={idx} style={{ marginBottom: 20 }}>
+                        <PlanAccordion data={item} />
+                    </View>
+                ))}
             </ScrollView>
 
             {/* Continue Button */}
@@ -113,7 +330,6 @@ const styles = StyleSheet.create({
         flex: 1,
         width: '100%',
         paddingHorizontal: 10,
-        backgroundColor: 'blue',
     },
     header: {
         color: '#fff',
@@ -133,6 +349,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 15,
         backgroundColor: '#0566E9',
+
+        shadowColor: '#171717',
+        shadowOffset: { width: 0, height: 8 },
+        shadowOpacity: 0.8,
+        shadowRadius: 3,
     },
     continueBtnText: {
         fontSize: 16,
