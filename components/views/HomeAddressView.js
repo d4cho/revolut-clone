@@ -11,7 +11,7 @@ import {
 import { StatusBar } from 'expo-status-bar';
 
 const HomeAddressView = ({ navigation, route }) => {
-    const { addressInfo } = route?.params;
+    // const { addressInfo } = route?.params;
 
     const [addressLine1, setAddressLine1] = useState('');
     const [addressLine2, setAddressLine2] = useState('');
@@ -20,17 +20,17 @@ const HomeAddressView = ({ navigation, route }) => {
 
     const [isContinue, setIsContinue] = useState(false);
 
-    useEffect(() => {
-        if (addressInfo) {
-            const al1 = addressInfo.structured_formatting.main_text;
-            const cit = addressInfo.terms[2].value;
-            const prov = addressInfo.terms[3].value;
+    // useEffect(() => {
+    //     if (addressInfo) {
+    //         const al1 = addressInfo.structured_formatting.main_text;
+    //         const cit = addressInfo.terms[2].value;
+    //         const prov = addressInfo.terms[3].value;
 
-            setAddressLine1(al1);
-            setCity(cit);
-            setProvince(prov);
-        }
-    }, []);
+    //         setAddressLine1(al1);
+    //         setCity(cit);
+    //         setProvince(prov);
+    //     }
+    // }, []);
 
     useEffect(() => {
         if (addressLine1 && city && province) {

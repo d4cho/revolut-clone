@@ -50,7 +50,7 @@ const CountryPickView = ({ navigation }) => {
                             },
                         ]}
                         onPress={() => {
-                            navigation.navigate('AddressSearchView');
+                            navigation.navigate('HomeAddressView');
                         }}
                         disabled={!country}
                     >

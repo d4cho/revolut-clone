@@ -86,7 +86,8 @@ const SelfieInfoView = ({ navigation }) => {
                     <Pressable
                         style={styles.continueBtn}
                         onPress={() => {
-                            navigation.navigate('TakeSelfieView');
+                            // navigation.navigate('TakeSelfieView');
+                            navigation.navigate('OccupationView');
                         }}
                     >
                         <Text style={styles.continueBtnText}>Continue</Text>

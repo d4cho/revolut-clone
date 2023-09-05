@@ -53,9 +53,10 @@ const ProofIdentityView = ({ navigation }) => {
                                 key={idx}
                                 style={styles.documentBtn}
                                 onPress={() => {
-                                    navigation.navigate('TakeIdPhotoView', {
-                                        document,
-                                    });
+                                    // navigation.navigate('TakeIdPhotoView', {
+                                    //     document,
+                                    // });
+                                    navigation.navigate('VerifyingIdView');
                                 }}
                             >
                                 <View

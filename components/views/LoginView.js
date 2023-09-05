@@ -102,6 +102,7 @@ const LoginView = ({ navigation }) => {
                             keyboardType='numeric'
                             textContentType='telephoneNumber'
                             clearButtonMode='while-editing'
+                            maxLength={10}
                         />
                     </View>
                     <Text style={styles.lostAccess}>{item.lostText}</Text>

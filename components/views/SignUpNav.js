@@ -27,6 +27,11 @@ import AddMoneyView from './AddMoneyView';
 const SignUpStack = createNativeStackNavigator();
 
 const LoginNav = ({ navigation }) => {
+    const headerStyle = {
+        backgroundColor: '#000',
+        borderBottomColor: 'transparent',
+    };
+
     return (
         <SignUpStack.Navigator>
             <SignUpStack.Screen
@@ -36,11 +41,10 @@ const LoginNav = ({ navigation }) => {
                     animation: 'slide_from_bottom',
                     headerShown: true,
                     headerTitle: '',
-                    headerStyle: {
-                        backgroundColor: '#000',
-                    },
+                    headerStyle: headerStyle,
                     headerLeft: () => (
                         <HeaderBackButton
+                            style={{ paddingInline: '16px' }}
                             onPress={() => navigation.navigate('Intro')}
                         />
                     ),
@@ -53,9 +57,7 @@ const LoginNav = ({ navigation }) => {
                     animation: 'slide_from_right',
                     headerShown: true,
                     headerTitle: '',
-                    headerStyle: {
-                        backgroundColor: '#000',
-                    },
+                    headerStyle: headerStyle,
                     headerLeft: () => (
                         <HeaderBackButton
                             onPress={() =>
@@ -74,9 +76,7 @@ const LoginNav = ({ navigation }) => {
                     animation: 'slide_from_right',
                     headerShown: true,
                     headerTitle: '',
-                    headerStyle: {
-                        backgroundColor: '#000',
-                    },
+                    headerStyle: headerStyle,
                     headerLeft: () => (
                         <HeaderBackButton
                             onPress={() =>
@@ -88,27 +88,25 @@ const LoginNav = ({ navigation }) => {
                     ),
                 }}
             />
-            <SignUpStack.Screen
+            {/* <SignUpStack.Screen
                 name='AddressSearchView'
                 component={AddressSearchView}
                 options={{
                     animation: 'slide_from_right',
                     headerShown: true,
                     headerTitle: '',
-                    headerStyle: {
-                        backgroundColor: '#000',
-                    },
+                    headerStyle: headerStyle,
                     headerLeft: () => (
                         <HeaderBackButton
                             onPress={() =>
                                 navigation.navigate('SignUp', {
-                                    screen: 'SignUpView',
+                                    screen: 'CountryPickView',
                                 })
                             }
                         />
                     ),
                 }}
-            />
+            /> */}
             <SignUpStack.Screen
                 name='HomeAddressView'
                 component={HomeAddressView}
@@ -116,14 +114,12 @@ const LoginNav = ({ navigation }) => {
                     animation: 'slide_from_right',
                     headerShown: true,
                     headerTitle: '',
-                    headerStyle: {
-                        backgroundColor: '#000',
-                    },
+                    headerStyle: headerStyle,
                     headerLeft: () => (
                         <HeaderBackButton
                             onPress={() =>
                                 navigation.navigate('SignUp', {
-                                    screen: 'SignUpView',
+                                    screen: 'CountryPickView',
                                 })
                             }
                         />
@@ -137,14 +133,12 @@ const LoginNav = ({ navigation }) => {
                     animation: 'slide_from_right',
                     headerShown: true,
                     headerTitle: '',
-                    headerStyle: {
-                        backgroundColor: '#000',
-                    },
+                    headerStyle: headerStyle,
                     headerLeft: () => (
                         <HeaderBackButton
                             onPress={() =>
                                 navigation.navigate('SignUp', {
-                                    screen: 'SignUpView',
+                                    screen: 'HomeAddressView',
                                 })
                             }
                         />
@@ -158,9 +152,7 @@ const LoginNav = ({ navigation }) => {
                     animation: 'slide_from_right',
                     headerShown: true,
                     headerTitle: '',
-                    headerStyle: {
-                        backgroundColor: '#000',
-                    },
+                    headerStyle: headerStyle,
                     headerLeft: () => (
                         <HeaderBackButton
                             onPress={() =>
@@ -179,9 +171,7 @@ const LoginNav = ({ navigation }) => {
                     animation: 'slide_from_right',
                     headerShown: true,
                     headerTitle: '',
-                    headerStyle: {
-                        backgroundColor: '#000',
-                    },
+                    headerStyle: headerStyle,
                     headerLeft: () => (
                         <HeaderBackButton
                             onPress={() =>
@@ -200,9 +190,7 @@ const LoginNav = ({ navigation }) => {
                     animation: 'slide_from_right',
                     headerShown: true,
                     headerTitle: '',
-                    headerStyle: {
-                        backgroundColor: '#000',
-                    },
+                    headerStyle: headerStyle,
                     headerLeft: () => (
                         <HeaderBackButton
                             onPress={() =>
@@ -214,16 +202,14 @@ const LoginNav = ({ navigation }) => {
                     ),
                 }}
             />
-            <SignUpStack.Screen
+            {/* <SignUpStack.Screen
                 name='TakeSelfieView'
                 component={TakeSelfieView}
                 options={{
                     animation: 'slide_from_right',
                     headerShown: true,
                     headerTitle: '',
-                    headerStyle: {
-                        backgroundColor: '#000',
-                    },
+                    headerStyle: headerStyle,
                     headerLeft: () => (
                         <HeaderBackButton
                             onPress={() =>
@@ -234,7 +220,7 @@ const LoginNav = ({ navigation }) => {
                         />
                     ),
                 }}
-            />
+            /> */}
             <SignUpStack.Screen
                 name='OccupationView'
                 component={OccupationView}
@@ -242,9 +228,7 @@ const LoginNav = ({ navigation }) => {
                     animation: 'slide_from_right',
                     headerShown: true,
                     headerTitle: '',
-                    headerStyle: {
-                        backgroundColor: '#000',
-                    },
+                    headerStyle: headerStyle,
                     headerLeft: () => (
                         <HeaderBackButton
                             onPress={() =>
@@ -263,9 +247,7 @@ const LoginNav = ({ navigation }) => {
                     animation: 'slide_from_right',
                     headerShown: true,
                     headerTitle: '',
-                    headerStyle: {
-                        backgroundColor: '#000',
-                    },
+                    headerStyle: headerStyle,
                     headerLeft: () => (
                         <HeaderBackButton
                             onPress={() =>
@@ -284,9 +266,7 @@ const LoginNav = ({ navigation }) => {
                     animation: 'slide_from_right',
                     headerShown: true,
                     headerTitle: '',
-                    headerStyle: {
-                        backgroundColor: '#000',
-                    },
+                    headerStyle: headerStyle,
                     headerLeft: () => (
                         <HeaderBackButton
                             onPress={() =>
@@ -305,9 +285,7 @@ const LoginNav = ({ navigation }) => {
                     animation: 'slide_from_right',
                     headerShown: true,
                     headerTitle: '',
-                    headerStyle: {
-                        backgroundColor: '#000',
-                    },
+                    headerStyle: headerStyle,
                     headerLeft: () => (
                         <HeaderBackButton
                             onPress={() =>
@@ -326,9 +304,7 @@ const LoginNav = ({ navigation }) => {
                     animation: 'slide_from_right',
                     headerShown: true,
                     headerTitle: '',
-                    headerStyle: {
-                        backgroundColor: '#000',
-                    },
+                    headerStyle: headerStyle,
                     headerLeft: () => (
                         <HeaderBackButton
                             onPress={() =>
@@ -340,16 +316,14 @@ const LoginNav = ({ navigation }) => {
                     ),
                 }}
             />
-            <SignUpStack.Screen
+            {/* <SignUpStack.Screen
                 name='TakeIdPhotoView'
                 component={TakeIdPhotoView}
                 options={{
                     animation: 'slide_from_right',
                     headerShown: true,
                     headerTitle: '',
-                    headerStyle: {
-                        backgroundColor: '#000',
-                    },
+                    headerStyle: headerStyle,
                     headerLeft: () => (
                         <HeaderBackButton
                             onPress={() =>
@@ -360,7 +334,7 @@ const LoginNav = ({ navigation }) => {
                         />
                     ),
                 }}
-            />
+            /> */}
             <SignUpStack.Screen
                 name='VerifyingIdView'
                 component={VerifyingIdView}
@@ -368,9 +342,7 @@ const LoginNav = ({ navigation }) => {
                     animation: 'slide_from_right',
                     headerShown: true,
                     headerTitle: '',
-                    headerStyle: {
-                        backgroundColor: '#000',
-                    },
+                    headerStyle: headerStyle,
                     headerLeft: () => (
                         <HeaderBackButton
                             onPress={() =>
@@ -389,9 +361,7 @@ const LoginNav = ({ navigation }) => {
                     animation: 'slide_from_right',
                     headerShown: true,
                     headerTitle: '',
-                    headerStyle: {
-                        backgroundColor: '#000',
-                    },
+                    headerStyle: headerStyle,
                     headerLeft: () => (
                         <HeaderBackButton
                             onPress={() =>
@@ -410,9 +380,7 @@ const LoginNav = ({ navigation }) => {
                     animation: 'slide_from_right',
                     headerShown: true,
                     headerTitle: '',
-                    headerStyle: {
-                        backgroundColor: '#000',
-                    },
+                    headerStyle: headerStyle,
                     headerLeft: () => (
                         <HeaderBackButton
                             onPress={() =>
@@ -431,9 +399,7 @@ const LoginNav = ({ navigation }) => {
                     animation: 'slide_from_right',
                     headerShown: true,
                     headerTitle: '',
-                    headerStyle: {
-                        backgroundColor: '#000',
-                    },
+                    headerStyle: headerStyle,
                     headerLeft: () => (
                         <HeaderBackButton
                             onPress={() =>

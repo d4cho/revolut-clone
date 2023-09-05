@@ -66,7 +66,13 @@ const PhoneCodeView = ({ route, navigation }) => {
                             />
                         </View>
 
-                        <Text style={styles.resend}>Resend code</Text>
+                        <Pressable
+                            onPress={() => {
+                                alert('code sent');
+                            }}
+                        >
+                            <Text style={styles.resend}>Resend code</Text>
+                        </Pressable>
 
                         <Pressable
                             onPress={() => {
