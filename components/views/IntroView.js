@@ -6,28 +6,51 @@ import Button from '../atoms/Button';
 import ProgressBar from '../atoms/ProgressBar';
 import IntroPage from '../molecules/IntroContent';
 
+// images
+import managingMoney from '../../assets/images/intro/managing-money.png';
+import controlCard from '../../assets/images/intro/control-card.jpeg';
+import sendCash from '../../assets/images/intro/send-cash.jpeg';
+import exchangeRate from '../../assets/images/intro/exchange-rate.jpeg';
+import safeHands from '../../assets/images/intro/safe-hands.jpeg';
+import budgetingTools from '../../assets/images/intro/budgeting-tools.png';
+import spendSmarter from '../../assets/images/intro/spend-smarter.jpeg';
+
 const INTRO_PAGES = [
     {
         heading: 'Managing money is easy with Revolut',
+        image: managingMoney,
+        bgColor: '#7f5cf6',
     },
     {
         heading: 'Control your card security in app',
+        image: controlCard,
+        bgColor: '#7f5cf6',
     },
     {
         heading: 'Send cash abroad, hassle-free',
+        image: sendCash,
+        bgColor: '#027DFB',
     },
     {
         heading: 'Great foreign exchange rates',
         subHeading: 'In 40+ currencies',
+        image: exchangeRate,
+        bgColor: '#7f5cf6',
     },
     {
         heading: 'Your money is in safe hands',
+        image: safeHands,
+        bgColor: '#7f5cf6',
     },
     {
         heading: 'Take control with budgeting tools',
+        image: budgetingTools,
+        bgColor: '#027DFB',
     },
     {
         heading: `Spend smarter, daily. Let's go!`,
+        image: spendSmarter,
+        bgColor: '#7f5cf6',
     },
 ];
 
@@ -63,20 +86,21 @@ const IntroView = ({ navigation }) => {
         }
     };
 
-    const getBgColor = () => {
-        if ([0, 2, 3, 6].includes(shownPage)) {
-            return '#0566E9'; // blue
-        } else {
-            return '#7f5cf6'; // purple
-        }
-    };
+    // const getBgColor = () => {
+    //     if ([0, 2, 3, 6].includes(shownPage)) {
+    //         return '#027DFB'; // blue
+    //     } else {
+    //         return '#7f5cf6'; // purple
+    //     }
+    // };
 
     return (
         <View
             style={[
                 styles.container,
                 {
-                    backgroundColor: getBgColor(),
+                    // backgroundColor: getBgColor(),
+                    backgroundColor: INTRO_PAGES[shownPage].bgColor,
                 },
             ]}
         >
@@ -103,6 +127,7 @@ const IntroView = ({ navigation }) => {
                 <IntroPage
                     heading={INTRO_PAGES[shownPage].heading}
                     subHeading={INTRO_PAGES[shownPage]?.subHeading}
+                    image={INTRO_PAGES[shownPage].image}
                     nextPageHandler={nextPageHandler}
                     prevPageHandler={prevPageHandler}
                 />

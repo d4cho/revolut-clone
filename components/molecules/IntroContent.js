@@ -1,9 +1,16 @@
-import { StyleSheet, Text, View, Pressable } from 'react-native';
+import {
+    StyleSheet,
+    Text,
+    View,
+    Pressable,
+    ImageBackground,
+} from 'react-native';
 import React from 'react';
 
 const IntroContent = ({
     heading,
     subHeading,
+    image,
     nextPageHandler,
     prevPageHandler,
 }) => {
@@ -14,10 +21,23 @@ const IntroContent = ({
                 <Text style={styles.subHeading}>{subHeading}</Text>
             </View>
 
-            <View style={styles.videoWrapper}>
-                <View style={styles.video}>
-                    <Text style={{ color: '#000' }}>Video</Text>
-                </View>
+            <View style={styles.mediaWrapper}>
+                {image ? (
+                    <View style={styles.image}>
+                        <ImageBackground
+                            source={image}
+                            resizeMode='stretch'
+                            imageStyle={{
+                                borderRadius: 10,
+                                height: 280,
+                            }}
+                        ></ImageBackground>
+                    </View>
+                ) : (
+                    <View style={styles.video}>
+                        <Text style={{ color: '#000' }}>Video</Text>
+                    </View>
+                )}
             </View>
 
             {/* next/prev page handler */}
@@ -59,7 +79,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: '#fff',
     },
-    videoWrapper: {
+    mediaWrapper: {
         flex: 2,
         justifyContent: 'center',
         alignItems: 'center',
@@ -73,6 +93,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#fff',
+    },
+    image: {
+        width: 250,
+        height: 280,
+        borderRadius: 10,
     },
     pressableView: {
         position: 'absolute',
