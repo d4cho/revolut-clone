@@ -30,6 +30,7 @@ const LOGIN_DATA = [
 const LoginView = ({ navigation }) => {
     const carouselRef = useRef(null);
     const width = Dimensions.get('window').width;
+    const height = Dimensions.get('window').height;
 
     const [selectedOption, setSelectedOption] = useState(0);
 
@@ -149,6 +150,7 @@ const LoginView = ({ navigation }) => {
                         ref={carouselRef}
                         loop={false}
                         width={width - 20}
+                        height={height}
                         data={LOGIN_DATA}
                         scrollAnimationDuration={200}
                         onSnapToItem={(index) => {

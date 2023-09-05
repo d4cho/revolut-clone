@@ -13,6 +13,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 const PlanCarousel = ({ planData, setSelectedPlan }) => {
     const carouselRef = useRef(null);
     const width = Dimensions.get('window').width;
+    const height = Dimensions.get('window').height;
 
     const renderItem = (info) => {
         const { item } = info;
@@ -54,6 +55,7 @@ const PlanCarousel = ({ planData, setSelectedPlan }) => {
             ref={carouselRef}
             loop={true}
             width={width}
+            height={height / 3}
             data={planData}
             scrollAnimationDuration={200}
             onSnapToItem={(index) => {
